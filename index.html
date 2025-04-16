@@ -237,6 +237,44 @@
       margin-top: 2px;
       color: #ccc;
     }
+
+    .hvb-copyright {
+    padding: 6px 12px;
+    font-weight: bold;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 75px #ff00ff;
+    animation: rainbow-border 1.5s infinite linear;
+    }
+
+    @keyframes rainbow-border {
+    0% {
+      color: #ff00ff;
+      text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    }
+    14% {
+      color: #ff0000;
+      text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
+    }
+    28% {
+      color: #00ff00;
+      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
+    }
+    42% {
+      color: #0000ff;
+      text-shadow: 0 0 5px #0000ff, 0 0 10px #0000ff, 0 0 20px #0000ff;
+    }
+    57% {
+      color: #ff8800;
+      text-shadow: 0 0 5px #ff8800, 0 0 10px #ff8800, 0 0 20px #ff8800;
+    }
+    71% {
+      color: #00ffff;
+      text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+    }
+    100% {
+      color: #ff00ff;
+      text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    }
+  }
   </style>
 </head>
 <body>
@@ -427,6 +465,61 @@
       console.log("Không thể phát nhạc:", err);
     });
   });
+  
+  // Phần bản quyền
+(function () {
+  const code = String.fromCharCode(
+    68, 101, 115, 105, 103, 110, 32, 98, 121, 32, 72, 111, 97, 110, 103, 32, 86, 97, 110, 32, 66, 97, 111
+  );
+
+  const el = document.createElement('div');
+  Object.assign(el.style, {
+    position: 'fixed',
+    bottom: '0px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    color: 'white',
+    fontSize: '14px',
+    fontFamily: 'Arial, sans-serif',
+    zIndex: 9997
+  });
+
+  el.className = 'hvb-copyright rainbow-border';
+  el.textContent = code;
+  document.body.appendChild(el);
+
+  const original = el.outerHTML;
+
+  setInterval(() => {
+    if (el.outerHTML !== original) {
+      alert('Phần bản quyền đã bị thay đổi hoặc xóa!');
+      document.body.innerHTML = '';
+      throw new Error('Bản quyền bị thay đổi.');
+    }
+  }, 100);
+
+  new MutationObserver(() => {
+    if (!document.body.contains(el)) {
+      alert('Không thể xóa phần bản quyền!');
+      document.body.innerHTML = '';
+      throw new Error('Bản quyền bị xóa.');
+    }
+    if (el.textContent !== code) {
+      alert('Phần bản quyền đã bị thay đổi!');
+      document.body.innerHTML = '';
+      throw new Error('Bản quyền bị thay đổi.');
+    }
+  }).observe(document.body, { childList: true, subtree: true, attributes: true });
+
+  (function protect() {
+    if (!document.body.innerHTML.includes('Hoang Van Bao')) {
+      alert('Mã JavaScript bị thay đổi hoặc xóa.');
+      document.body.innerHTML = '';
+      throw new Error('Mã bị thay đổi.');
+    }
+    setTimeout(protect, 100);
+  })();
+})();
   </script>  
 </body>
 </html>
