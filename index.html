@@ -123,6 +123,20 @@
       font-size: 28px;
       font-weight: bold;
       margin-bottom: 20px;
+      background: linear-gradient(90deg, #ff7e5f, #feb47b, #6a11cb, #2575fc, #2af598, #9b2af3);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: colorChange 3s linear infinite;
+    }
+    
+    @keyframes colorChange {
+      0% {
+        background-position: 300% 0%;
+      }
+      100% {
+        background-position: -300% 0%;
+      }
     }
 
     .socials a {
@@ -185,7 +199,7 @@
     .seekbar {
       position: relative;
       width: 100%;
-      height: 5px;
+      height: 8px;
       background: rgba(255, 255, 255, 0.3);
       border-radius: 3px;
       overflow: hidden;
