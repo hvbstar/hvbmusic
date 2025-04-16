@@ -372,26 +372,32 @@
     alert("Không được sao chép nội dung!");
   });
   
-  // PHÁT HIỆN DEVTOOLS
-  (function () {
-    let devtoolsOpen = false;
-    const threshold = 160;
-    window.addEventListener('resize', () => {
-      if (
-        window.outerWidth - window.innerWidth > threshold ||
-        window.outerHeight - window.innerHeight > threshold
-      ) {
-        devtoolsOpen = true;
-        alert('Phát hiện DevTools đang mở!');
-      }
-    });
-    setInterval(() => {
-      if (devtoolsOpen) {
-        document.body.innerHTML = '';
-        alert('Trang đã bị khóa vì mở DevTools!');
-      }
-    }, 1000);
-  })();
+// CHỈ CHẶN DEVTOOLS TRÊN PC
+(function () {
+  // Kiểm tra nếu không phải thiết bị di động
+  const isMobile = /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
+  if (isMobile) return; // Không làm gì nếu là mobile
+
+  let devtoolsOpen = false;
+  const threshold = 160;
+
+  window.addEventListener('resize', () => {
+    if (
+      window.outerWidth - window.innerWidth > threshold ||
+      window.outerHeight - window.innerHeight > threshold
+    ) {
+      devtoolsOpen = true;
+      alert('Phát hiện DevTools đang mở!');
+    }
+  });
+
+  setInterval(() => {
+    if (devtoolsOpen) {
+      document.body.innerHTML = '';
+      alert('Trang đã bị khóa vì mở DevTools!');
+    }
+  }, 1000);
+})();
     // Script kích hoạt overlay
   const overlay = document.getElementById('overlay');
 
