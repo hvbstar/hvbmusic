@@ -71,6 +71,29 @@
       pointer-events: auto;
     }
 
+    .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, #000000, #1a1a1a);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-family: sans-serif;
+    z-index: 9999;
+    cursor: pointer;
+    transition: opacity 0.4s ease;
+    }
+
+    .overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    }
+    
     @keyframes rainbowBorder {
       0% { border-color: #ff0000; }
       25% { border-color: #00ff00; }
@@ -228,7 +251,12 @@
       </div>
     </div>
 
-    <audio id="audio" src="SONG_SRC_1" preload="metadata"></audio>
+    <!-- Overlay -->
+    <div id="overlay" class="overlay">
+      <div class="overlay-content">Click To Enter</div>
+    </div>
+    <!-- Audio -->
+    <audio id="audio" preload="auto" muted></audio>
   </div>
 
   <script>
@@ -356,7 +384,20 @@
       }
     }, 1000);
   })();
+    // Script kích hoạt overlay
+  const overlay = document.getElementById('overlay');
+
+  overlay.addEventListener('click', () => {
+    overlay.classList.add('hidden');
+
+    // Reset audio về đầu và phát
+    audio.currentTime = 0;
+    audio.muted = false;
+    audio.play().catch(err => {
+      console.log("Không thể phát nhạc:", err);
+    });
+  });
   </script>  
-  
 </body>
 </html>
+                                                                <!-- Design By Hoàng Văn Bảo -->
