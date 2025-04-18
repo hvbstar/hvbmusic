@@ -28,606 +28,606 @@
 <link rel="icon" type="image/jpg" sizes="32x32" href="./img/hvbdz-32x32.jpg">
 <link rel="manifest" href="site.webmanifest">
 
-  <title>HVB x Chjllx</title>
+<title>HVB x Chjllx</title>
 
-  <style>
-    html, body {
-    overflow: hidden !important;
-    overscroll-behavior: none;
-    touch-action: none;
-    }
+<style>
+html, body {
+overflow: hidden !important;
+overscroll-behavior: none;
+touch-action: none;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
 
-    body {
-    background: url('img/zed.jpeg') no-repeat center center fixed;
-    background-size: cover;
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-    -webkit-user-drag: none;
-    }
+body {
+background: url('img/zed.jpeg') no-repeat center center fixed;
+background-size: cover;
+font-family: 'Segoe UI', sans-serif;
+color: white;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+user-select: none;
+-webkit-user-drag: none;
+}
 
-    /* Ngăn đè và lưu ảnh - avatar và ảnh cover */
-    img.avatar,
-    img.cover {
-    user-select: none;         /* Không cho chọn ảnh */
-    pointer-events: none;      /* Ngăn nhấp chuột phải, chạm giữ */
-    -webkit-user-drag: none;   /* Ngăn kéo ảnh trên Safari/Chrome */
-    touch-action: none;        /* Ngăn thao tác cảm ứng */
-    }
+/* Ngăn đè và lưu ảnh - avatar và ảnh cover */
+img.avatar,
+img.cover {
+user-select: none;         /* Không cho chọn ảnh */
+pointer-events: none;      /* Ngăn nhấp chuột phải, chạm giữ */
+-webkit-user-drag: none;   /* Ngăn kéo ảnh trên Safari/Chrome */
+touch-action: none;        /* Ngăn thao tác cảm ứng */
+}
 
-    /* Tắt chọn văn bản */
-    * {
-    user-select: none !important; /* Tắt chọn văn bản trên tất cả các trình duyệt */
-    -webkit-user-select: none !important; /* Dành cho Safari */
-    -moz-user-select: none !important; /* Dành cho Firefox */
-    -ms-user-select: none !important; /* Dành cho Internet Explorer */
-    }
-    
-    .container {
-      max-width: 420px;
-      width: 100%;
-      padding: 30px;
-      background: rgba(0,0,0,0.5);
-      border-radius: 20px;
-      border: 4px solid;
-      animation: rainbowBorder 5s linear infinite;
-      text-align: center;
-      pointer-events: auto;
-    }
+/* Tắt chọn văn bản */
+* {
+user-select: none !important; /* Tắt chọn văn bản trên tất cả các trình duyệt */
+-webkit-user-select: none !important; /* Dành cho Safari */
+-moz-user-select: none !important; /* Dành cho Firefox */
+-ms-user-select: none !important; /* Dành cho Internet Explorer */
+}
 
-    .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom right, #000000, #1a1a1a);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    font-family: sans-serif;
-    z-index: 9999;
-    cursor: pointer;
-    transition: opacity 0.4s ease;
-    }
+.container {
+max-width: 420px;
+width: 100%;
+padding: 30px;
+background: rgba(0,0,0,0.5);
+border-radius: 20px;
+border: 4px solid;
+animation: rainbowBorder 5s linear infinite;
+text-align: center;
+pointer-events: auto;
+}
 
-    .overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-    }
-    
-    @keyframes rainbowBorder {
-      0% { border-color: #ff0000; }
-      25% { border-color: #00ff00; }
-      50% { border-color: #0000ff; }
-      75% { border-color: #ff00ff; }
-      100% { border-color: #ff0000; }
-    }
+.overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(to bottom right, #000000, #1a1a1a);
+color: white;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 2rem;
+font-family: sans-serif;
+z-index: 9999;
+cursor: pointer;
+transition: opacity 0.4s ease;
+}
 
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid white;
-      margin-bottom: 20px;
-    }
+.overlay.hidden {
+opacity: 0;
+pointer-events: none;
+}
 
-    .username {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      background: linear-gradient(90deg, #ff7e5f, #feb47b, #6a11cb, #2575fc, #2af598, #9b2af3);
-      background-size: 300% 100%;
-      -webkit-background-clip: text;
-      color: transparent;
-      animation: colorChange 3s linear infinite;
-    }
-    
-    @keyframes colorChange {
-      0% {
-        background-position: 300% 0%;
-      }
-      100% {
-        background-position: -300% 0%;
-      }
-    }
+@keyframes rainbowBorder {
+0% { border-color: #ff0000; }
+25% { border-color: #00ff00; }
+50% { border-color: #0000ff; }
+75% { border-color: #ff00ff; }
+100% { border-color: #ff0000; }
+}
 
-    .socials a {
-      margin: 0 10px;
-      color: white;
-      font-size: 22px;
-      transition: 0.3s;
-    }
+.avatar {
+width: 120px;
+height: 120px;
+border-radius: 50%;
+object-fit: cover;
+border: 4px solid white;
+margin-bottom: 20px;
+}
 
-    .socials a:hover {
-      color: #ffd700;
-    }
+.username {
+font-size: 28px;
+font-weight: bold;
+margin-bottom: 20px;
+background: linear-gradient(90deg, #ff7e5f, #feb47b, #6a11cb, #2575fc, #2af598, #9b2af3);
+background-size: 300% 100%;
+-webkit-background-clip: text;
+color: transparent;
+animation: colorChange 3s linear infinite;
+}
 
-    .socials {
-      margin-bottom: 30px;
-    }
+@keyframes colorChange {
+0% {
+background-position: 300% 0%;
+}
+100% {
+background-position: -300% 0%;
+}
+}
 
-    .music-player {
-      display: flex;
-      align-items: center;
-      background: rgba(255,255,255,0.1);
-      border-radius: 15px;
-      padding: 30px 15px;
-      gap: 15px;
-      width: 100%;
-      justify-content: space-between;
-    }
+.socials a {
+margin: 0 10px;
+color: white;
+font-size: 22px;
+transition: 0.3s;
+}
 
-    .cover {
-      width: 60px;
-      height: 60px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
+.socials a:hover {
+color: #ffd700;
+}
 
-    .music-info {
-      flex: 1;
-      text-align: left;
-    }
+.socials {
+margin-bottom: 30px;
+}
 
-    .title {
-      font-size: 20px;
-      font-weight: bold;
-      position: relative;
-      top: -5px;
-    }
+.music-player {
+display: flex;
+align-items: center;
+background: rgba(255,255,255,0.1);
+border-radius: 15px;
+padding: 30px 15px;
+gap: 15px;
+width: 100%;
+justify-content: space-between;
+}
 
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.cover {
+width: 60px;
+height: 60px;
+border-radius: 10px;
+object-fit: cover;
+}
 
-    .controls button {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 25px;
-      cursor: pointer;
-    }
+.music-info {
+flex: 1;
+text-align: left;
+}
 
-    .seekbar {
-      position: relative;
-      width: 100%;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 3px;
-      overflow: hidden;
-    }
+.title {
+font-size: 20px;
+font-weight: bold;
+position: relative;
+top: -5px;
+}
 
-    .seekbar-fill {
-      height: 100%;
-      background: #00ffcc;
-      width: 0%;
-      transition: 0.1s;
-    }
+.controls {
+display: flex;
+align-items: center;
+gap: 10px;
+}
 
-    .seekbar-thumb {
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      width: 15px;
-      height: 15px;
-      background: #00ffcc;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
+.controls button {
+background: none;
+border: none;
+color: white;
+font-size: 25px;
+cursor: pointer;
+}
 
-    .seekbar-thumb:hover {
-      background: #ffcc00;
-    }
+.seekbar {
+position: relative;
+width: 100%;
+height: 8px;
+background: rgba(255, 255, 255, 0.3);
+border-radius: 3px;
+overflow: hidden;
+}
 
-    .time {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      margin-top: 2px;
-      color: #ccc;
-    }
+.seekbar-fill {
+height: 100%;
+background: #00ffcc;
+width: 0%;
+transition: 0.1s;
+}
 
-    .hvb-copyright {
-    padding: 6px 12px;
-    font-weight: bold;
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 75px #ff00ff;
-    animation: rainbow-border 1.5s infinite linear;
-    }
+.seekbar-thumb {
+position: absolute;
+top: -5px;
+left: -5px;
+width: 15px;
+height: 15px;
+background: #00ffcc;
+border-radius: 50%;
+cursor: pointer;
+transition: background 0.2s;
+}
 
-    @keyframes rainbow-border {
-    0% {
-      color: #ff00ff;
-      text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
-    }
-    14% {
-      color: #ff0000;
-      text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
-    }
-    28% {
-      color: #00ff00;
-      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
-    }
-    42% {
-      color: #0000ff;
-      text-shadow: 0 0 5px #0000ff, 0 0 10px #0000ff, 0 0 20px #0000ff;
-    }
-    57% {
-      color: #ff8800;
-      text-shadow: 0 0 5px #ff8800, 0 0 10px #ff8800, 0 0 20px #ff8800;
-    }
-    71% {
-      color: #00ffff;
-      text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
-    }
-    100% {
-      color: #ff00ff;
-      text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
-    }
-  }
-    /* Phần Volume */
+.seekbar-thumb:hover {
+background: #ffcc00;
+}
+
+.time {
+display: flex;
+justify-content: space-between;
+font-size: 12px;
+margin-top: 2px;
+color: #ccc;
+}
+
+.hvb-copyright {
+padding: 6px 12px;
+font-weight: bold;
+text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 75px #ff00ff;
+animation: rainbow-border 1.5s infinite linear;
+}
+
+@keyframes rainbow-border {
+0% {
+color: #ff00ff;
+text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+}
+14% {
+color: #ff0000;
+text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
+}
+28% {
+color: #00ff00;
+text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
+}
+42% {
+color: #0000ff;
+text-shadow: 0 0 5px #0000ff, 0 0 10px #0000ff, 0 0 20px #0000ff;
+}
+57% {
+color: #ff8800;
+text-shadow: 0 0 5px #ff8800, 0 0 10px #ff8800, 0 0 20px #ff8800;
+}
+71% {
+color: #00ffff;
+text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+100% {
+color: #ff00ff;
+text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+}
+}
+/* Phần Volume */
 #volumeControl {
-  width: 100px;
-  accent-color: #00ffcc;
-  cursor: pointer;
-  transition: opacity 0.3s;
-  pointer-events: auto !important;
-  touch-action: auto !important;
-  user-select: auto !important;
-  -webkit-user-select: auto !important;
+width: 100px;
+accent-color: #00ffcc;
+cursor: pointer;
+transition: opacity 0.3s;
+pointer-events: auto !important;
+touch-action: auto !important;
+user-select: auto !important;
+-webkit-user-select: auto !important;
 }
 #volumeControl:hover {
-  opacity: 1;
+opacity: 1;
 }
 .volume-icon {
-  font-size: 20px;
-  color: white;
-  margin-left: 10px;
-  transition: color 0.3s;
+font-size: 20px;
+color: white;
+margin-left: 10px;
+transition: color 0.3s;
 }
 .volume-muted {
-  color: red !important;
+color: red !important;
 }
-  </style>
+</style>
 </head>
 <body>
 
-  <div class="container">
-    <img class="avatar" src="img/Artist HVB.jpg" alt="Avatar">
-    <div class="username">HOÀNG VĂN BẢO ♬</div>
+<div class="container">
+<img class="avatar" src="img/Artist HVB.jpg" alt="Avatar">
+<div class="username">HOÀNG VĂN BẢO ♬</div>
 
-    <div class="socials">
-      <a href="https://www.facebook.com/HVB.Profile" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://www.instagram.com/oba.vh_" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://open.spotify.com/artist/6NyGoNlK1jpmDs2yL5NRQt" target="_blank"><i class="fa-brands fa-spotify"></i></a>
-      <a href="https://www.youtube.com/@hvb2017" target="_blank"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.tiktok.com/@_.hvb" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="https://t.me/hvb_ip" target="_blank"><i class="fab fa-telegram-plane"></i></a>
-      <a href="https://zalo.me/0395152981" target="_blank"><i class="fa-brands fa-facebook-messenger"></i></a>
-    </div>    
+<div class="socials">
+<a href="https://www.facebook.com/HVB.Profile" target="_blank"><i class="fab fa-facebook-f"></i></a>
+<a href="https://www.instagram.com/oba.vh_" target="_blank"><i class="fab fa-instagram"></i></a>
+<a href="https://open.spotify.com/artist/6NyGoNlK1jpmDs2yL5NRQt" target="_blank"><i class="fa-brands fa-spotify"></i></a>
+<a href="https://www.youtube.com/@hvb2017" target="_blank"><i class="fab fa-youtube"></i></a>
+<a href="https://www.tiktok.com/@_.hvb" target="_blank"><i class="fab fa-tiktok"></i></a>
+<a href="https://t.me/hvb_ip" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+<a href="https://zalo.me/0395152981" target="_blank"><i class="fa-brands fa-facebook-messenger"></i></a>
+</div>    
 
-    <div class="music-player">
-      <img class="cover" src="img/AVT Nghệ Sĩ.jpg" alt="Cover">
-      <div class="music-info">
-        <div class="title" id="song-title">SONG_TITLE_1</div>
-    <div class="controls">
-      <button onclick="prevSong()"><i class="fas fa-backward"></i></button>
-      <button onclick="togglePlay()" id="play-btn"><i class="fas fa-play"></i></button>
-      <button onclick="nextSong()"><i class="fas fa-forward"></i></button>
-      <i id="volumeIcon" class="fas fa-volume-up volume-icon"></i>
-      <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="1" title="Âm lượng">
-    </div>
-        <div class="seekbar" onclick="seek(event)">
-          <div class="seekbar-fill" id="progress"></div>
-          <div class="seekbar-thumb" id="thumb"></div>
-        </div>
-        <div class="time">
-          <span id="current">0:00</span>
-          <span id="duration">0:00</span>
-        </div>
-      </div>
-    </div>
+<div class="music-player">
+<img class="cover" src="img/AVT Nghệ Sĩ.jpg" alt="Cover">
+<div class="music-info">
+<div class="title" id="song-title">SONG_TITLE_1</div>
+<div class="controls">
+<button onclick="prevSong()"><i class="fas fa-backward"></i></button>
+<button onclick="togglePlay()" id="play-btn"><i class="fas fa-play"></i></button>
+<button onclick="nextSong()"><i class="fas fa-forward"></i></button>
+<i id="volumeIcon" class="fas fa-volume-up volume-icon"></i>
+<input type="range" id="volumeControl" min="0" max="1" step="0.01" value="1" title="Âm lượng">
+</div>
+<div class="seekbar" onclick="seek(event)">
+<div class="seekbar-fill" id="progress"></div>
+<div class="seekbar-thumb" id="thumb"></div>
+</div>
+<div class="time">
+<span id="current">0:00</span>
+<span id="duration">0:00</span>
+</div>
+</div>
+</div>
 
-    <!-- Overlay -->
-    <div id="overlay" class="overlay">
-      <div class="overlay-content">Click To Enter</div>
-    </div>
-    <!-- Audio -->
-    <audio id="audio" preload="auto" muted></audio>
-  </div>
+<!-- Overlay -->
+<div id="overlay" class="overlay">
+<div class="overlay-content">Click To Enter</div>
+</div>
+<!-- Audio -->
+<audio id="audio" preload="auto" muted></audio>
+</div>
 
-  <script>
-    const audio = document.getElementById("audio");
-    const playBtn = document.getElementById("play-btn");
-    const progress = document.getElementById("progress");
-    const thumb = document.getElementById("thumb");
-    const current = document.getElementById("current");
-    const duration = document.getElementById("duration");
-    const title = document.getElementById("song-title");
+<script>
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("play-btn");
+const progress = document.getElementById("progress");
+const thumb = document.getElementById("thumb");
+const current = document.getElementById("current");
+const duration = document.getElementById("duration");
+const title = document.getElementById("song-title");
 
-    const songs = [
-      { title: "Nước Mắt Muộn Màng", src: "audio/Nước Mắt Muộn Màng Ft Khoảng Cách.mp3" },
-      { title: "Là Anh", src: "audio/Là Anh - Tú Sena.mp3" },
-      { title: "Gặp Mẹ Trong Mer", src: "audio/Gặp Mẹ Trong Mer.mp3" },
-      { title: "Chờ Người Nơi Ấy Remix", src: "audio/Chờ Người Nơi Ấy Remix.mp3" },
-      { title: "Có Anh Ở Đây Rồi Remix", src: "audio/Có Anh Ở Đây Rồi - Slex Remix.mp3" }
-    ];
-    let currentIndex = 0;
+const songs = [
+{ title: "Nước Mắt Muộn Màng", src: "audio/Nước Mắt Muộn Màng Ft Khoảng Cách.mp3" },
+{ title: "Là Anh", src: "audio/Là Anh - Tú Sena.mp3" },
+{ title: "Gặp Mẹ Trong Mer", src: "audio/Gặp Mẹ Trong Mer.mp3" },
+{ title: "Chờ Người Nơi Ấy Remix", src: "audio/Chờ Người Nơi Ấy Remix.mp3" },
+{ title: "Có Anh Ở Đây Rồi Remix", src: "audio/Có Anh Ở Đây Rồi - Slex Remix.mp3" }
+];
+let currentIndex = 0;
 
-    function togglePlay() {
-      if (audio.paused) {
-        audio.play();
-        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-      } else {
-        audio.pause();
-        playBtn.innerHTML = '<i class="fas fa-play"></i>';
-      }
-    }
+function togglePlay() {
+if (audio.paused) {
+audio.play();
+playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+} else {
+audio.pause();
+playBtn.innerHTML = '<i class="fas fa-play"></i>';
+}
+}
 
-    function updateProgress() {
-      const percent = (audio.currentTime / audio.duration) * 100;
-      progress.style.width = percent + "%";
-      thumb.style.left = `calc(${percent}% - 7px)`;
-      current.textContent = formatTime(audio.currentTime);
-      duration.textContent = formatTime(audio.duration);
-    }
+function updateProgress() {
+const percent = (audio.currentTime / audio.duration) * 100;
+progress.style.width = percent + "%";
+thumb.style.left = `calc(${percent}% - 7px)`;
+current.textContent = formatTime(audio.currentTime);
+duration.textContent = formatTime(audio.duration);
+}
 
-    function formatTime(t) {
-      const min = Math.floor(t / 60);
-      const sec = Math.floor(t % 60).toString().padStart(2, "0");
-      return `${min}:${sec}`;
-    }
+function formatTime(t) {
+const min = Math.floor(t / 60);
+const sec = Math.floor(t % 60).toString().padStart(2, "0");
+return `${min}:${sec}`;
+}
 
-    function seek(e) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const percent = (e.clientX - rect.left) / rect.width;
-      audio.currentTime = percent * audio.duration;
-    }
+function seek(e) {
+const rect = e.currentTarget.getBoundingClientRect();
+const percent = (e.clientX - rect.left) / rect.width;
+audio.currentTime = percent * audio.duration;
+}
 
-    function nextSong() {
-      currentIndex = (currentIndex + 1) % songs.length;
-      loadSong(currentIndex);
-    }
+function nextSong() {
+currentIndex = (currentIndex + 1) % songs.length;
+loadSong(currentIndex);
+}
 
-    function prevSong() {
-      currentIndex = (currentIndex - 1 + songs.length) % songs.length;
-      loadSong(currentIndex);
-    }
+function prevSong() {
+currentIndex = (currentIndex - 1 + songs.length) % songs.length;
+loadSong(currentIndex);
+}
 
 function loadSong(index) {
-  audio.src = songs[index].src;
-  title.textContent = songs[index].title;
-  audio.load(); // ép load lại
+audio.src = songs[index].src;
+title.textContent = songs[index].title;
+audio.load(); // ép load lại
 
-  audio.oncanplaythrough = () => {
-    audio.play();
-    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-  };
+audio.oncanplaythrough = () => {
+audio.play();
+playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+};
 }
-    audio.addEventListener("timeupdate", updateProgress);
-    audio.addEventListener("ended", nextSong);
-    audio.addEventListener("loadedmetadata", () => {
-      if (!isNaN(audio.duration)) {
-        duration.textContent = formatTime(audio.duration);
-      }
-    });
-    loadSong(currentIndex);
+audio.addEventListener("timeupdate", updateProgress);
+audio.addEventListener("ended", nextSong);
+audio.addEventListener("loadedmetadata", () => {
+if (!isNaN(audio.duration)) {
+duration.textContent = formatTime(audio.duration);
+}
+});
+loadSong(currentIndex);
 
-    // JS PHẦN VOLUME
+// JS PHẦN VOLUME
 const volumeControl = document.getElementById("volumeControl");
 const volumeIcon = document.querySelector(".volume-icon");
 
 volumeControl.addEventListener("input", () => {
-  audio.volume = volumeControl.value;
-  updateVolumeIcon();
+audio.volume = volumeControl.value;
+updateVolumeIcon();
 });
 
 volumeIcon.addEventListener("click", () => {
-  if (audio.volume > 0) {
-    // Đang có tiếng → mute
-    volumeControl.value = 0;
-    audio.volume = 0;
-  } else {
-    // Đang mute → bật max
-    volumeControl.value = 1;
-    audio.volume = 1;
-  }
-  updateVolumeIcon();
+if (audio.volume > 0) {
+// Đang có tiếng → mute
+volumeControl.value = 0;
+audio.volume = 0;
+} else {
+// Đang mute → bật max
+volumeControl.value = 1;
+audio.volume = 1;
+}
+updateVolumeIcon();
 });
 
 function updateVolumeIcon() {
-  if (audio.volume == 0) {
-    volumeIcon.classList.remove("fa-volume-up");
-    volumeIcon.classList.add("fa-volume-mute", "volume-muted");
-  } else {
-    volumeIcon.classList.add("fa-volume-up");
-    volumeIcon.classList.remove("fa-volume-mute", "volume-muted");
-  }
+if (audio.volume == 0) {
+volumeIcon.classList.remove("fa-volume-up");
+volumeIcon.classList.add("fa-volume-mute", "volume-muted");
+} else {
+volumeIcon.classList.add("fa-volume-up");
+volumeIcon.classList.remove("fa-volume-mute", "volume-muted");
 }
-  </script>
+}
+</script>
 <script>
-  // CHẶN CHUỘT PHẢI VÀ CHỌN VĂN BẢN
-  document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('selectstart', e => e.preventDefault());
-  
-  // CHẶN KÉO CHUỘT
-  ['mousedown', 'mousemove', 'mouseup'].forEach(evt =>
-  document.addEventListener(evt, e => {
-    if (e.target.id !== 'volumeControl') {
-      e.preventDefault();
-    }
-  })
+// CHẶN CHUỘT PHẢI VÀ CHỌN VĂN BẢN
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
+
+// CHẶN KÉO CHUỘT
+['mousedown', 'mousemove', 'mouseup'].forEach(evt =>
+document.addEventListener(evt, e => {
+if (e.target.id !== 'volumeControl') {
+e.preventDefault();
+}
+})
 );
-  
-  // CHẶN PHÍM TẮT DEVTOOLS & SAO CHÉP
-  document.addEventListener('keydown', e => {
-    const key = e.key.toLowerCase();
-    if (
-      (e.ctrlKey && ['u', 'c', 'a'].includes(key)) || // Ctrl+U, Ctrl+C, Ctrl+A
-      (e.ctrlKey && e.shiftKey && ['i', 'j'].includes(key)) || // Ctrl+Shift+I/J
-      e.keyCode === 123 || // F12
-      e.keyCode === 122 || // F11
-      (e.shiftKey && ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) // Shift + phím mũi tên
-    ) {
-      e.preventDefault();
-      alert("Hành động này không được phép!");
-    }
-  });
-  
-  // CHẶN SAO CHÉP
-  document.addEventListener('copy', e => {
-    e.preventDefault();
-    alert("Không được sao chép nội dung!");
-  });
-  
+
+// CHẶN PHÍM TẮT DEVTOOLS & SAO CHÉP
+document.addEventListener('keydown', e => {
+const key = e.key.toLowerCase();
+if (
+(e.ctrlKey && ['u', 'c', 'a'].includes(key)) || // Ctrl+U, Ctrl+C, Ctrl+A
+(e.ctrlKey && e.shiftKey && ['i', 'j'].includes(key)) || // Ctrl+Shift+I/J
+e.keyCode === 123 || // F12
+e.keyCode === 122 || // F11
+(e.shiftKey && ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) // Shift + phím mũi tên
+) {
+e.preventDefault();
+alert("Hành động này không được phép!");
+}
+});
+
+// CHẶN SAO CHÉP
+document.addEventListener('copy', e => {
+e.preventDefault();
+alert("Không được sao chép nội dung!");
+});
+
 // CHỈ CHẶN DEVTOOLS TRÊN PC
 (function () {
-  // Kiểm tra nếu không phải thiết bị di động
-  const isMobile = /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
-  if (isMobile) return; // Không làm gì nếu là mobile
+// Kiểm tra nếu không phải thiết bị di động
+const isMobile = /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
+if (isMobile) return; // Không làm gì nếu là mobile
 
-  let devtoolsOpen = false;
-  const threshold = 160;
+let devtoolsOpen = false;
+const threshold = 160;
 
-  window.addEventListener('resize', () => {
-    if (
-      window.outerWidth - window.innerWidth > threshold ||
-      window.outerHeight - window.innerHeight > threshold
-    ) {
-      devtoolsOpen = true;
-      alert('Phát hiện DevTools đang mở!');
-    }
-  });
+window.addEventListener('resize', () => {
+if (
+window.outerWidth - window.innerWidth > threshold ||
+window.outerHeight - window.innerHeight > threshold
+) {
+devtoolsOpen = true;
+alert('Phát hiện DevTools đang mở!');
+}
+});
 
-  setInterval(() => {
-    if (devtoolsOpen) {
-      document.body.innerHTML = '';
-      alert('Trang đã bị khóa vì mở DevTools!');
-    }
-  }, 1000);
+setInterval(() => {
+if (devtoolsOpen) {
+document.body.innerHTML = '';
+alert('Trang đã bị khóa vì mở DevTools!');
+}
+}, 1000);
 })();
-    // Script kích hoạt overlay
-  const overlay = document.getElementById('overlay');
+// Script kích hoạt overlay
+const overlay = document.getElementById('overlay');
 
-  overlay.addEventListener('click', () => {
-    overlay.classList.add('hidden');
+overlay.addEventListener('click', () => {
+overlay.classList.add('hidden');
 
-    // Reset audio về đầu và phát
-    audio.currentTime = 0;
-    audio.muted = false;
-    audio.play().catch(err => {
-      console.log("Không thể phát nhạc:", err);
-    });
-  });
+// Reset audio về đầu và phát
+audio.currentTime = 0;
+audio.muted = false;
+audio.play().catch(err => {
+console.log("Không thể phát nhạc:", err);
+});
+});
 
-  // Chặn scroll trên mobile
+// Chặn scroll trên mobile
 window.addEventListener('touchmove', function (e) {
-  if (e.target.id !== 'volumeControl') {
-    e.preventDefault();
-  }
+if (e.target.id !== 'volumeControl') {
+e.preventDefault();
+}
 }, { passive: false });
-  
-  // Phần bản quyền
+
+// Phần bản quyền
 (function () {
-  const code = String.fromCharCode(
-    68, 101, 115, 105, 103, 110, 32, 98, 121, 32, 72, 111, 97, 110, 103, 32, 86, 97, 110, 32, 66, 97, 111
-  );
+const code = String.fromCharCode(
+68, 101, 115, 105, 103, 110, 32, 98, 121, 32, 72, 111, 97, 110, 103, 32, 86, 97, 110, 32, 66, 97, 111
+);
 
-  const el = document.createElement('div');
-  Object.assign(el.style, {
-    position: 'fixed',
-    bottom: '0px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    color: 'white',
-    fontSize: '14px',
-    fontFamily: 'Arial, sans-serif',
-    zIndex: 9997
-  });
+const el = document.createElement('div');
+Object.assign(el.style, {
+position: 'fixed',
+bottom: '0px',
+left: '50%',
+transform: 'translateX(-50%)',
+color: 'white',
+fontSize: '14px',
+fontFamily: 'Arial, sans-serif',
+zIndex: 9997
+});
 
-  el.className = 'hvb-copyright rainbow-border';
-  el.textContent = code;
-  document.body.appendChild(el);
+el.className = 'hvb-copyright rainbow-border';
+el.textContent = code;
+document.body.appendChild(el);
 
-  const original = el.outerHTML;
+const original = el.outerHTML;
 
-  setInterval(() => {
-    if (el.outerHTML !== original) {
-      alert('Phần bản quyền đã bị thay đổi hoặc xóa!');
-      document.body.innerHTML = '';
-      throw new Error('Bản quyền bị thay đổi.');
-    }
-  }, 100);
+setInterval(() => {
+if (el.outerHTML !== original) {
+alert('Phần bản quyền đã bị thay đổi hoặc xóa!');
+document.body.innerHTML = '';
+throw new Error('Bản quyền bị thay đổi.');
+}
+}, 100);
 
-  new MutationObserver(() => {
-    if (!document.body.contains(el)) {
-      alert('Không thể xóa phần bản quyền!');
-      document.body.innerHTML = '';
-      throw new Error('Bản quyền bị xóa.');
-    }
-    if (el.textContent !== code) {
-      alert('Phần bản quyền đã bị thay đổi!');
-      document.body.innerHTML = '';
-      throw new Error('Bản quyền bị thay đổi.');
-    }
-  }).observe(document.body, { childList: true, subtree: true, attributes: true });
+new MutationObserver(() => {
+if (!document.body.contains(el)) {
+alert('Không thể xóa phần bản quyền!');
+document.body.innerHTML = '';
+throw new Error('Bản quyền bị xóa.');
+}
+if (el.textContent !== code) {
+alert('Phần bản quyền đã bị thay đổi!');
+document.body.innerHTML = '';
+throw new Error('Bản quyền bị thay đổi.');
+}
+}).observe(document.body, { childList: true, subtree: true, attributes: true });
 
-  (function protect() {
-    if (!document.body.innerHTML.includes('Hoang Van Bao')) {
-      alert('Mã JavaScript bị thay đổi hoặc xóa.');
-      document.body.innerHTML = '';
-      throw new Error('Mã bị thay đổi.');
-    }
-    setTimeout(protect, 100);
-  })();
+(function protect() {
+if (!document.body.innerHTML.includes('Hoang Van Bao')) {
+alert('Mã JavaScript bị thay đổi hoặc xóa.');
+document.body.innerHTML = '';
+throw new Error('Mã bị thay đổi.');
+}
+setTimeout(protect, 100);
+})();
 })();
 
-  // JS PHẦN SOUND
+// JS PHẦN SOUND
 let isDragging = false;
 thumb.addEventListener("mousedown", (e) => {
-  isDragging = true;
-  document.body.style.userSelect = "none";
+isDragging = true;
+document.body.style.userSelect = "none";
 });
 
 document.addEventListener("mouseup", () => {
-  if (isDragging) {
-    isDragging = false;
-    document.body.style.userSelect = "";
-  }
+if (isDragging) {
+isDragging = false;
+document.body.style.userSelect = "";
+}
 });
 
 document.addEventListener("mousemove", (e) => {
-  if (isDragging) {
-    const seekbar = document.querySelector(".seekbar");
-    const rect = seekbar.getBoundingClientRect();
-    let percent = (e.clientX - rect.left) / rect.width;
-    percent = Math.max(0, Math.min(1, percent)); // giới hạn từ 0 -> 1
-    const newTime = percent * audio.duration;
-    audio.currentTime = newTime;
+if (isDragging) {
+const seekbar = document.querySelector(".seekbar");
+const rect = seekbar.getBoundingClientRect();
+let percent = (e.clientX - rect.left) / rect.width;
+percent = Math.max(0, Math.min(1, percent)); // giới hạn từ 0 -> 1
+const newTime = percent * audio.duration;
+audio.currentTime = newTime;
 
-    // Cập nhật UI
-    progress.style.width = percent * 100 + "%";
-    thumb.style.left = `calc(${percent * 100}% - 7px)`;
-    current.textContent = formatTime(audio.currentTime);
-  }
+// Cập nhật UI
+progress.style.width = percent * 100 + "%";
+thumb.style.left = `calc(${percent * 100}% - 7px)`;
+current.textContent = formatTime(audio.currentTime);
+}
 });
-  </script>  
+</script>  
 </body>
 </html>
-                                                                <!-- Design By Hoàng Văn Bảo -->
+                                                              <!-- Design By Hoàng Văn Bảo -->
