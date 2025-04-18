@@ -435,24 +435,31 @@ const volumeControl = document.getElementById("volumeControl");
 const volumeIcon = document.querySelector(".volume-icon");
 
 volumeControl.addEventListener("input", () => {
-audio.volume = volumeControl.value;
-audio.muted = audio.volume == 0; // ✅ tự mute nếu kéo về 0
-updateVolumeIcon();
+  const val = parseFloat(volumeControl.value);
+
+  // Một số thiết bị cần gọi lại unmute để áp dụng volume mới
+  audio.muted = val === 0;
+  audio.volume = val < 0.01 ? 0.0001 : val; // dùng 0.0001 để mobile không bị ignore
+  updateVolumeIcon();
 });
 
 volumeIcon.addEventListener("click", () => {
-if (audio.volume > 0) {
-// ✅ Mute
-audio.volume = 0;
-audio.muted = true;
-volumeControl.value = 0;
-} else {
-// ✅ Unmute
-audio.muted = false;
-audio.volume = 1;
-volumeControl.value = 1;
-}
-updateVolumeIcon();
+  if (audio.volume > 0 || !audio.muted) {
+    // Mute
+    audio.volume = 0.0001; // dùng giá trị nhỏ thay vì 0 để mobile nhận
+    audio.muted = true;
+    volumeControl.value = 0;
+  } else {
+    // Unmute
+    audio.muted = false;
+
+    setTimeout(() => {
+      audio.volume = 1; // cần set sau unmute
+      volumeControl.value = 1;
+      updateVolumeIcon();
+    }, 50); // delay nhỏ giúp trình duyệt cập nhật
+  }
+  updateVolumeIcon();
 });
 
 function updateVolumeIcon() {
