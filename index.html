@@ -281,6 +281,29 @@
       text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
     }
   }
+    /* Phần Volume */
+#volumeControl {
+  width: 100px;
+  accent-color: #00ffcc;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  pointer-events: auto !important;
+  touch-action: auto !important;
+  user-select: auto !important;
+  -webkit-user-select: auto !important;
+}
+#volumeControl:hover {
+  opacity: 1;
+}
+.volume-icon {
+  font-size: 20px;
+  color: white;
+  margin-left: 10px;
+  transition: color 0.3s;
+}
+.volume-muted {
+  color: red !important;
+}
   </style>
 </head>
 <body>
@@ -303,11 +326,13 @@
       <img class="cover" src="img/AVT Nghệ Sĩ.jpg" alt="Cover">
       <div class="music-info">
         <div class="title" id="song-title">SONG_TITLE_1</div>
-        <div class="controls">
-          <button onclick="prevSong()"><i class="fas fa-backward"></i></button>
-          <button onclick="togglePlay()" id="play-btn"><i class="fas fa-play"></i></button>
-          <button onclick="nextSong()"><i class="fas fa-forward"></i></button>
-        </div>
+    <div class="controls">
+      <button onclick="prevSong()"><i class="fas fa-backward"></i></button>
+      <button onclick="togglePlay()" id="play-btn"><i class="fas fa-play"></i></button>
+      <button onclick="nextSong()"><i class="fas fa-forward"></i></button>
+      <i id="volumeIcon" class="fas fa-volume-up volume-icon"></i>
+      <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="1" title="Âm lượng">
+    </div>
         <div class="seekbar" onclick="seek(event)">
           <div class="seekbar-fill" id="progress"></div>
           <div class="seekbar-thumb" id="thumb"></div>
@@ -400,6 +425,38 @@
       }
     });
     loadSong(currentIndex);
+
+    // JS PHẦN VOLUME
+const volumeControl = document.getElementById("volumeControl");
+const volumeIcon = document.querySelector(".volume-icon");
+
+volumeControl.addEventListener("input", () => {
+  audio.volume = volumeControl.value;
+  updateVolumeIcon();
+});
+
+volumeIcon.addEventListener("click", () => {
+  if (audio.volume > 0) {
+    // Đang có tiếng → mute
+    volumeControl.value = 0;
+    audio.volume = 0;
+  } else {
+    // Đang mute → bật max
+    volumeControl.value = 1;
+    audio.volume = 1;
+  }
+  updateVolumeIcon();
+});
+
+function updateVolumeIcon() {
+  if (audio.volume == 0) {
+    volumeIcon.classList.remove("fa-volume-up");
+    volumeIcon.classList.add("fa-volume-mute", "volume-muted");
+  } else {
+    volumeIcon.classList.add("fa-volume-up");
+    volumeIcon.classList.remove("fa-volume-mute", "volume-muted");
+  }
+}
   </script>
 <script>
   // CHẶN CHUỘT PHẢI VÀ CHỌN VĂN BẢN
@@ -408,8 +465,12 @@
   
   // CHẶN KÉO CHUỘT
   ['mousedown', 'mousemove', 'mouseup'].forEach(evt =>
-    document.addEventListener(evt, e => e.preventDefault())
-  );
+  document.addEventListener(evt, e => {
+    if (e.target.id !== 'volumeControl') {
+      e.preventDefault();
+    }
+  })
+);
   
   // CHẶN PHÍM TẮT DEVTOOLS & SAO CHÉP
   document.addEventListener('keydown', e => {
@@ -473,9 +534,11 @@
   });
 
   // Chặn scroll trên mobile
-  window.addEventListener('touchmove', function (e) {
-  e.preventDefault();
-  }, { passive: false });
+window.addEventListener('touchmove', function (e) {
+  if (e.target.id !== 'volumeControl') {
+    e.preventDefault();
+  }
+}, { passive: false });
   
   // Phần bản quyền
 (function () {
@@ -531,6 +594,36 @@
     setTimeout(protect, 100);
   })();
 })();
+
+  // JS PHẦN SOUND
+let isDragging = false;
+thumb.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  document.body.style.userSelect = "none";
+});
+
+document.addEventListener("mouseup", () => {
+  if (isDragging) {
+    isDragging = false;
+    document.body.style.userSelect = "";
+  }
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (isDragging) {
+    const seekbar = document.querySelector(".seekbar");
+    const rect = seekbar.getBoundingClientRect();
+    let percent = (e.clientX - rect.left) / rect.width;
+    percent = Math.max(0, Math.min(1, percent)); // giới hạn từ 0 -> 1
+    const newTime = percent * audio.duration;
+    audio.currentTime = newTime;
+
+    // Cập nhật UI
+    progress.style.width = percent * 100 + "%";
+    thumb.style.left = `calc(${percent * 100}% - 7px)`;
+    current.textContent = formatTime(audio.currentTime);
+  }
+});
   </script>  
 </body>
 </html>
