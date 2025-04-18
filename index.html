@@ -436,18 +436,21 @@ const volumeIcon = document.querySelector(".volume-icon");
 
 volumeControl.addEventListener("input", () => {
 audio.volume = volumeControl.value;
+audio.muted = audio.volume == 0; // ✅ tự mute nếu kéo về 0
 updateVolumeIcon();
 });
 
 volumeIcon.addEventListener("click", () => {
 if (audio.volume > 0) {
-// Đang có tiếng → mute
-volumeControl.value = 0;
+// ✅ Mute
 audio.volume = 0;
+audio.muted = true;
+volumeControl.value = 0;
 } else {
-// Đang mute → bật max
-volumeControl.value = 1;
+// ✅ Unmute
+audio.muted = false;
 audio.volume = 1;
+volumeControl.value = 1;
 }
 updateVolumeIcon();
 });
@@ -529,9 +532,14 @@ const overlay = document.getElementById('overlay');
 overlay.addEventListener('click', () => {
 overlay.classList.add('hidden');
 
-// Reset audio về đầu và phát
-audio.currentTime = 0;
+// ✅ Cho phép phát âm thanh sau tương tác người dùng
 audio.muted = false;
+audio.volume = 1;
+volumeControl.value = 1;
+updateVolumeIcon();
+
+// ✅ Bắt đầu phát nhạc
+audio.currentTime = 0;
 audio.play().catch(err => {
 console.log("Không thể phát nhạc:", err);
 });
@@ -631,4 +639,4 @@ current.textContent = formatTime(audio.currentTime);
 </script>  
 </body>
 </html>
-                                                              <!-- Design By Hoàng Văn Bảo -->
+                                                                <!-- Design By Hoàng Văn Bảo -->
