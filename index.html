@@ -421,6 +421,7 @@ audio.play();
 playBtn.innerHTML = '<i class="fas fa-pause"></i>';
 };
 }
+
 audio.addEventListener("timeupdate", updateProgress);
 audio.addEventListener("ended", nextSong);
 audio.addEventListener("loadedmetadata", () => {
@@ -435,29 +436,22 @@ const volumeControl = document.getElementById("volumeControl");
 const volumeIcon = document.querySelector(".volume-icon");
 
 volumeControl.addEventListener("input", () => {
-  const val = parseFloat(volumeControl.value);
-
-  // Một số thiết bị cần gọi lại unmute để áp dụng volume mới
-  audio.muted = val === 0;
-  audio.volume = val < 0.01 ? 0.0001 : val; // dùng 0.0001 để mobile không bị ignore
+  audio.volume = volumeControl.value;
+  audio.muted = audio.volume == 0; // ✅ tự mute nếu kéo về 0
   updateVolumeIcon();
 });
 
 volumeIcon.addEventListener("click", () => {
-  if (audio.volume > 0 || !audio.muted) {
-    // Mute
-    audio.volume = 0.0001; // dùng giá trị nhỏ thay vì 0 để mobile nhận
+  if (audio.volume > 0) {
+    // ✅ Mute
+    audio.volume = 0;
     audio.muted = true;
     volumeControl.value = 0;
   } else {
-    // Unmute
+    // ✅ Unmute
     audio.muted = false;
-
-    setTimeout(() => {
-      audio.volume = 1; // cần set sau unmute
-      volumeControl.value = 1;
-      updateVolumeIcon();
-    }, 50); // delay nhỏ giúp trình duyệt cập nhật
+    audio.volume = 1;
+    volumeControl.value = 1;
   }
   updateVolumeIcon();
 });
@@ -537,19 +531,19 @@ alert('Trang đã bị khóa vì mở DevTools!');
 const overlay = document.getElementById('overlay');
 
 overlay.addEventListener('click', () => {
-overlay.classList.add('hidden');
+  overlay.classList.add('hidden');
 
-// ✅ Cho phép phát âm thanh sau tương tác người dùng
-audio.muted = false;
-audio.volume = 1;
-volumeControl.value = 1;
-updateVolumeIcon();
+  // Cho phép âm thanh hoạt động
+  audio.muted = false;
+  audio.volume = 1;
+  volumeControl.value = 1;
+  updateVolumeIcon();
 
-// ✅ Bắt đầu phát nhạc
-audio.currentTime = 0;
-audio.play().catch(err => {
-console.log("Không thể phát nhạc:", err);
-});
+  // Reset bài hát và phát
+  audio.currentTime = 0;
+  audio.play().catch(err => {
+    console.log("Không thể phát nhạc:", err);
+  });
 });
 
 // Chặn scroll trên mobile
@@ -646,4 +640,4 @@ current.textContent = formatTime(audio.currentTime);
 </script>  
 </body>
 </html>
-                                                                <!-- Design By Hoàng Văn Bảo -->
+                                                            <!-- Design By Hoàng Văn Bảo -->
