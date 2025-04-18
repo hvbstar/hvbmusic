@@ -410,13 +410,16 @@
       loadSong(currentIndex);
     }
 
-    function loadSong(index) {
-      audio.src = songs[index].src;
-      title.textContent = songs[index].title;
-      audio.play();
-      playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    }
+function loadSong(index) {
+  audio.src = songs[index].src;
+  title.textContent = songs[index].title;
+  audio.load(); // ép load lại
 
+  audio.oncanplaythrough = () => {
+    audio.play();
+    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+  };
+}
     audio.addEventListener("timeupdate", updateProgress);
     audio.addEventListener("ended", nextSong);
     audio.addEventListener("loadedmetadata", () => {
