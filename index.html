@@ -434,35 +434,43 @@ loadSong(currentIndex);
 
 // JS PHẦN VOLUME
 const volumeControl = document.getElementById("volumeControl");
-const volumeIcon = document.querySelector(".volume-icon");
+const volumeIcon = document.getElementById("volumeIcon");
 
+// Gán sự kiện khi kéo volume
 volumeControl.addEventListener("input", () => {
-  audio.volume = parseFloat(volumeControl.value);  // Sửa tại đây
-  audio.muted = audio.volume === 0;
-  updateVolumeIcon();
-});
+  const vol = parseFloat(volumeControl.value);
 
-volumeIcon.addEventListener("click", () => {
-  if (audio.volume > 0) {
-    audio.volume = 0;
+  if (vol <= 0.01) {
     audio.muted = true;
-    volumeControl.value = 0;
   } else {
     audio.muted = false;
-    audio.volume = 1;
-    volumeControl.value = 1;
   }
+
   updateVolumeIcon();
 });
 
+// Khi click icon loa để bật/tắt tiếng
+volumeIcon.addEventListener("click", () => {
+  if (audio.muted || parseFloat(volumeControl.value) <= 0.01) {
+    audio.muted = false;
+    volumeControl.value = 1;
+  } else {
+    audio.muted = true;
+    volumeControl.value = 0;
+  }
+
+  updateVolumeIcon();
+});
+
+// Cập nhật giao diện icon loa
 function updateVolumeIcon() {
-if (audio.volume == 0) {
-volumeIcon.classList.remove("fa-volume-up");
-volumeIcon.classList.add("fa-volume-mute", "volume-muted");
-} else {
-volumeIcon.classList.add("fa-volume-up");
-volumeIcon.classList.remove("fa-volume-mute", "volume-muted");
-}
+  if (audio.muted || parseFloat(volumeControl.value) <= 0.01) {
+    volumeIcon.classList.remove("fa-volume-up");
+    volumeIcon.classList.add("fa-volume-mute", "volume-muted");
+  } else {
+    volumeIcon.classList.add("fa-volume-up");
+    volumeIcon.classList.remove("fa-volume-mute", "volume-muted");
+  }
 }
 </script>
 <script>
@@ -531,14 +539,10 @@ const overlay = document.getElementById('overlay');
 
 overlay.addEventListener('click', () => {
   overlay.classList.add('hidden');
-
-  // Cho phép âm thanh hoạt động
   audio.muted = false;
-  audio.volume = 1;
   volumeControl.value = 1;
   updateVolumeIcon();
 
-  // Reset bài hát và phát
   audio.currentTime = 0;
   audio.play().catch(err => {
     console.log("Không thể phát nhạc:", err);
