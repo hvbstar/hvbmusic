@@ -32,45 +32,46 @@
 
 <style>
 html, body {
-overflow: hidden !important;
-overscroll-behavior: none;
-touch-action: none;
+  overflow: hidden !important;
+  overscroll-behavior: none;
 }
 
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-background: url('img/zed.jpeg') no-repeat center center fixed;
-background-size: cover;
-font-family: 'Segoe UI', sans-serif;
-color: white;
-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-user-select: none;
--webkit-user-drag: none;
+  background: url('img/zed.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-user-drag: none;
 }
 
-/* Ngăn đè và lưu ảnh - avatar và ảnh cover */
+/* Ngăn chọn ảnh và văn bản không cần thiết */
 img.avatar,
-img.cover {
-user-select: none;         /* Không cho chọn ảnh */
-pointer-events: none;      /* Ngăn nhấp chuột phải, chạm giữ */
--webkit-user-drag: none;   /* Ngăn kéo ảnh trên Safari/Chrome */
-touch-action: none;        /* Ngăn thao tác cảm ứng */
+img.cover,
+.username {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  pointer-events: none;
+  -webkit-user-drag: none;
 }
 
-/* Tắt chọn văn bản */
-* {
-user-select: none !important; /* Tắt chọn văn bản trên tất cả các trình duyệt */
--webkit-user-select: none !important; /* Dành cho Safari */
--moz-user-select: none !important; /* Dành cho Firefox */
--ms-user-select: none !important; /* Dành cho Internet Explorer */
+/* Chỉ tắt chọn văn bản, KHÔNG tắt pointer-events để overlay bắt được click */
+.overlay {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
 }
 
 .container {
@@ -436,19 +437,17 @@ const volumeControl = document.getElementById("volumeControl");
 const volumeIcon = document.querySelector(".volume-icon");
 
 volumeControl.addEventListener("input", () => {
-  audio.volume = volumeControl.value;
-  audio.muted = audio.volume == 0; // ✅ tự mute nếu kéo về 0
+  audio.volume = parseFloat(volumeControl.value);  // Sửa tại đây
+  audio.muted = audio.volume === 0;
   updateVolumeIcon();
 });
 
 volumeIcon.addEventListener("click", () => {
   if (audio.volume > 0) {
-    // ✅ Mute
     audio.volume = 0;
     audio.muted = true;
     volumeControl.value = 0;
   } else {
-    // ✅ Unmute
     audio.muted = false;
     audio.volume = 1;
     volumeControl.value = 1;
