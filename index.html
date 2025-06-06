@@ -440,29 +440,54 @@ const volumeIcon = document.getElementById("volumeIcon");
 volumeControl.addEventListener("input", () => {
   const vol = parseFloat(volumeControl.value);
 
-  if (vol <= 0.01) {
-    audio.muted = true;
-  } else {
-    audio.muted = false;
+  // Cập nhật âm lượng cho PC (nếu hỗ trợ)
+  if (typeof audio.volume === "number") {
+    try {
+      audio.volume = vol;
+    } catch (e) {
+      console.warn("Không thể thay đổi volume:", e);
+    }
   }
+
+  // Cập nhật muted cho mọi nền tảng
+  audio.muted = vol <= 0.01;
 
   updateVolumeIcon();
 });
 
-// Khi click icon loa để bật/tắt tiếng
 volumeIcon.addEventListener("click", () => {
-  if (audio.muted || parseFloat(volumeControl.value) <= 0.01) {
+  const isMuted = audio.muted || parseFloat(volumeControl.value) <= 0.01;
+
+  if (isMuted) {
     audio.muted = false;
     volumeControl.value = 1;
+
+    // Thử set lại volume cho PC
+    if (typeof audio.volume === "number") {
+      try {
+        audio.volume = 1;
+      } catch (e) {
+        console.warn("Không thể bật lại volume:", e);
+      }
+    }
+
   } else {
     audio.muted = true;
     volumeControl.value = 0;
+
+    // PC vẫn nên set volume = 0 nếu được
+    if (typeof audio.volume === "number") {
+      try {
+        audio.volume = 0;
+      } catch (e) {
+        console.warn("Không thể tắt volume:", e);
+      }
+    }
   }
 
   updateVolumeIcon();
 });
 
-// Cập nhật giao diện icon loa
 function updateVolumeIcon() {
   if (audio.muted || parseFloat(volumeControl.value) <= 0.01) {
     volumeIcon.classList.remove("fa-volume-up");
