@@ -350,7 +350,7 @@ color: red !important;
 <div class="overlay-content">Click To Enter</div>
 </div>
 <!-- Audio -->
-<audio id="audio" preload="auto" muted></audio>
+<audio id="audio" preload="auto"></audio>
 </div>
 
 <script>
@@ -418,8 +418,7 @@ title.textContent = songs[index].title;
 audio.load(); // ép load lại
 
 audio.oncanplaythrough = () => {
-audio.play();
-playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+  playBtn.innerHTML = '<i class="fas fa-play"></i>';
 };
 }
 
@@ -564,12 +563,13 @@ const overlay = document.getElementById('overlay');
 
 overlay.addEventListener('click', () => {
   overlay.classList.add('hidden');
-  audio.muted = false;
-  volumeControl.value = 1;
-  updateVolumeIcon();
-
   audio.currentTime = 0;
-  audio.play().catch(err => {
+
+  audio.play().then(() => {
+    audio.volume = parseFloat(volumeControl.value); // volume sẽ có tác dụng sau play
+    updateVolumeIcon();
+    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+  }).catch(err => {
     console.log("Không thể phát nhạc:", err);
   });
 });
