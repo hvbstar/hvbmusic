@@ -371,15 +371,18 @@ const songs = [
 { title: "Có Anh Ở Đây Rồi Remix", src: "audio/Có Anh Ở Đây Rồi - Slex Remix.mp3" }
 ];
 let currentIndex = 0;
+let isPlaying = false;
 
 function togglePlay() {
-if (audio.paused) {
-audio.play();
-playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-} else {
-audio.pause();
-playBtn.innerHTML = '<i class="fas fa-play"></i>';
-}
+  if (audio.paused) {
+    audio.play();
+    isPlaying = true;
+    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+  } else {
+    audio.pause();
+    isPlaying = false;
+    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+  }
 }
 
 function updateProgress() {
@@ -403,23 +406,33 @@ audio.currentTime = percent * audio.duration;
 }
 
 function nextSong() {
-currentIndex = (currentIndex + 1) % songs.length;
-loadSong(currentIndex);
+  currentIndex = (currentIndex + 1) % songs.length;
+  isPlaying = true;
+  loadSong(currentIndex);
 }
 
 function prevSong() {
-currentIndex = (currentIndex - 1 + songs.length) % songs.length;
-loadSong(currentIndex);
+  currentIndex = (currentIndex - 1 + songs.length) % songs.length;
+  isPlaying = true;
+  loadSong(currentIndex);
 }
 
 function loadSong(index) {
-audio.src = songs[index].src;
-title.textContent = songs[index].title;
-audio.load(); // ép load lại
+  audio.src = songs[index].src;
+  title.textContent = songs[index].title;
+  audio.load();
 
-audio.oncanplaythrough = () => {
-  playBtn.innerHTML = '<i class="fas fa-play"></i>';
-};
+  audio.oncanplaythrough = () => {
+    if (isPlaying) {
+      audio.play().then(() => {
+        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      }).catch(err => {
+        console.log("Không thể phát nhạc:", err);
+      });
+    } else {
+      playBtn.innerHTML = '<i class="fas fa-play"></i>';
+    }
+  };
 }
 
 audio.addEventListener("timeupdate", updateProgress);
@@ -563,15 +576,11 @@ const overlay = document.getElementById('overlay');
 
 overlay.addEventListener('click', () => {
   overlay.classList.add('hidden');
-  audio.currentTime = 0;
+  isPlaying = true; // Kích hoạt trạng thái phát từ đây
+  loadSong(currentIndex); // Load lại bài đầu tiên (đảm bảo play trong loadSong sẽ được gọi)
 
-  audio.play().then(() => {
-    audio.volume = parseFloat(volumeControl.value); // volume sẽ có tác dụng sau play
-    updateVolumeIcon();
-    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-  }).catch(err => {
-    console.log("Không thể phát nhạc:", err);
-  });
+  audio.volume = parseFloat(volumeControl.value);
+  updateVolumeIcon();
 });
 
 // Chặn scroll trên mobile
