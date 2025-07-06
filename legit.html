@@ -76,6 +76,24 @@ justify-content: center;
 min-height: 100vh;
 user-select: none;
 }
+/* Mặc định toàn bộ trang là con chuột mũi tên custom */
+html, body {
+  cursor: url("https://1.bp.blogspot.com/-qbWo9mPKO2Y/YL9utYdQBdI/AAAAAAAAFs4/mtjGu6u2uGwtJsT4gZG4lbhLV1a5lG6OQCLcBGAsYHQ/s0/mouse-f1.png"), default;
+}
+.verified {
+  display: inline-block;
+  cursor: url("https://1.bp.blogspot.com/-qbWo9mPKO2Y/YL9utYdQBdI/AAAAAAAAFs4/mtjGu6u2uGwtJsT4gZG4lbhLV1a5lG6OQCLcBGAsYHQ/s0/mouse-f1.png"), default !important;
+}
+
+/* Tất cả thành phần có thể click thì đổi thành bàn tay */
+a,
+button,
+.copy-btn,
+.back-home,
+input[type="button"],
+input[type="submit"] {
+  cursor: url("https://1.bp.blogspot.com/-nYv2dLl3oXY/YL9utYBCh8I/AAAAAAAAFtA/wII4lVw5w4k-4isGMY41heTqk8U4TJujgCLcBGAsYHQ/s0/mouse-f2.png"), pointer !important;
+}
 .container {
 max-width: 600px;
 width: 100%;
