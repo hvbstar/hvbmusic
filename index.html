@@ -64,6 +64,25 @@ overflow: hidden !important;
 overscroll-behavior: none;
 }
 
+html, body {
+  cursor: url("https://1.bp.blogspot.com/-qbWo9mPKO2Y/YL9utYdQBdI/AAAAAAAAFs4/mtjGu6u2uGwtJsT4gZG4lbhLV1a5lG6OQCLcBGAsYHQ/s0/mouse-f1.png"), default;
+}
+/* TẤT CẢ thành phần có thể click */
+a,
+button,
+input[type="button"],
+input[type="submit"],
+.payment-box a,
+.controls button,
+.seekbar,
+.seekbar-thumb,
+#volumeControl,
+#volumeIcon,
+.overlay,
+.cursor-click {
+  cursor: url("https://1.bp.blogspot.com/-nYv2dLl3oXY/YL9utYBCh8I/AAAAAAAAFtA/wII4lVw5w4k-4isGMY41heTqk8U4TJujgCLcBGAsYHQ/s0/mouse-f2.png"), pointer !important;
+}
+
 * {
 margin: 0;
 padding: 0;
@@ -206,31 +225,58 @@ margin-bottom: 20px;
 }
 
 .username {
-font-size: 28px;
-font-weight: bold;
-margin-bottom: 20px;
-background: linear-gradient(
-90deg,
-#ff7e5f,
-#feb47b,
-#6a11cb,
-#2575fc,
-#2af598,
-#9b2af3
-);
-background-size: 300% 100%;
--webkit-background-clip: text;
-color: transparent;
-animation: colorChange 3s linear infinite;
+  position: relative;
+  z-index: 1;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  background: linear-gradient(
+    90deg,
+    #ff7e5f,
+    #feb47b,
+    #6a11cb,
+    #2575fc,
+    #2af598,
+    #9b2af3
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: colorChange 3s linear infinite;
 }
 
+/* Viền sáng nhấp nháy */
+.username::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    #ff7e5f,
+    #feb47b,
+    #6a11cb,
+    #2575fc,
+    #2af598,
+    #9b2af3
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: colorChange 3s linear infinite;
+  filter: blur(8px);
+}
+
+/* Gradient chạy */
 @keyframes colorChange {
-0% {
-background-position: 300% 0%;
-}
-100% {
-background-position: -300% 0%;
-}
+  0% {
+    background-position: 300% 0%;
+  }
+  100% {
+    background-position: -300% 0%;
+  }
 }
 
 .socials a {
@@ -398,7 +444,7 @@ color: red !important;
 <body>
 <div class="container">
 <img class="avatar" src="img/Artist HVB.jpg" alt="Avatar" />
-<div class="username">HOÀNG VĂN BẢO ♬</div>
+<div class="username" data-text="Hoàng Văn Bảo ♬">Hoàng Văn Bảo ♬</div>
 
 <div class="socials">
 <a href="https://www.facebook.com/HVB.FAQ" target="_blank"
