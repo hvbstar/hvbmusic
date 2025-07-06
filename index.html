@@ -65,7 +65,7 @@ overscroll-behavior: none;
 }
 
 html, body {
-cursor: url("https://1.bp.blogspot.com/-qbWo9mPKO2Y/YL9utYdQBdI/AAAAAAAAFs4/mtjGu6u2uGwtJsT4gZG4lbhLV1a5lG6OQCLcBGAsYHQ/s0/mouse-f1.png"), default;
+  cursor: url("https://1.bp.blogspot.com/-qbWo9mPKO2Y/YL9utYdQBdI/AAAAAAAAFs4/mtjGu6u2uGwtJsT4gZG4lbhLV1a5lG6OQCLcBGAsYHQ/s0/mouse-f1.png"), default;
 }
 /* TẤT CẢ thành phần có thể click */
 a,
@@ -80,7 +80,7 @@ input[type="submit"],
 #volumeIcon,
 .overlay,
 .cursor-click {
-cursor: url("https://1.bp.blogspot.com/-nYv2dLl3oXY/YL9utYBCh8I/AAAAAAAAFtA/wII4lVw5w4k-4isGMY41heTqk8U4TJujgCLcBGAsYHQ/s0/mouse-f2.png"), pointer !important;
+  cursor: url("https://1.bp.blogspot.com/-nYv2dLl3oXY/YL9utYBCh8I/AAAAAAAAFtA/wII4lVw5w4k-4isGMY41heTqk8U4TJujgCLcBGAsYHQ/s0/mouse-f2.png"), pointer !important;
 }
 
 * {
@@ -216,119 +216,119 @@ border-color: #ff0000;
 }
 
 .avatar-wrapper {
-position: relative;
-width: 120px;
-height: 120px;
-border-radius: 50%;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
 }
 
 .avatar-wrapper {
-position: relative;
-width: 120px;
-height: 120px;
-border-radius: 50%;
-margin: 0 auto 20px; /* căn giữa và cách dưới */
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 20px; /* căn giữa và cách dưới */
 }
 
 .avatar {
-width: 100%;
-height: 100%;
-border-radius: 50%;
-object-fit: cover;
-display: block;
-position: relative;
-z-index: 2; /* ảnh nằm trên */
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 2; /* ảnh nằm trên */
 }
 
 /* Viền động nhiều màu */
 .avatar-wrapper::before {
-content: "";
-position: absolute;
-top: -4px; /* độ dày viền */
-left: -4px;
-right: -4px;
-bottom: -4px;
-border-radius: 50%;
-background: conic-gradient(
-#ff0000,
-#ff7f00,
-#ffff00,
-#00ff00,
-#0000ff,
-#4b0082,
-#8f00ff,
-#ff0000
-);
-animation: spinBorder 2s linear infinite; /* tốc độ nhanh hơn */
-z-index: 1;
-box-shadow:
-0 0 10px rgba(255, 0, 0, 0.6),
-0 0 20px rgba(255, 127, 0, 0.6),
-0 0 30px rgba(0, 255, 0, 0.6);
+  content: "";
+  position: absolute;
+  top: -4px; /* độ dày viền */
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #00ff00,
+    #0000ff,
+    #4b0082,
+    #8f00ff,
+    #ff0000
+  );
+  animation: spinBorder 2s linear infinite; /* tốc độ nhanh hơn */
+  z-index: 1;
+  box-shadow:
+    0 0 10px rgba(255, 0, 0, 0.6),
+    0 0 20px rgba(255, 127, 0, 0.6),
+    0 0 30px rgba(0, 255, 0, 0.6);
 }
 
 @keyframes spinBorder {
-0% {
-transform: rotate(0deg);
-}
-100% {
-transform: rotate(360deg);
-}
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .username {
-position: relative;
-z-index: 1;
-font-size: 30px;
-font-weight: bold;
-margin-bottom: 20px;
-background: linear-gradient(
-90deg,
-#ff7e5f,
-#feb47b,
-#6a11cb,
-#2575fc,
-#2af598,
-#9b2af3
-);
-background-size: 300% 100%;
--webkit-background-clip: text;
-color: transparent;
-animation: colorChange 3s linear infinite;
+  position: relative;
+  z-index: 1;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  background: linear-gradient(
+    90deg,
+    #ff7e5f,
+    #feb47b,
+    #6a11cb,
+    #2575fc,
+    #2af598,
+    #9b2af3
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: colorChange 3s linear infinite;
 }
 
 /* Viền sáng nhấp nháy */
 .username::before {
-content: attr(data-text);
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-z-index: -1;
-background: linear-gradient(
-90deg,
-#ff7e5f,
-#feb47b,
-#6a11cb,
-#2575fc,
-#2af598,
-#9b2af3
-);
-background-size: 300% 100%;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-animation: colorChange 3s linear infinite;
-filter: blur(8px);
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    #ff7e5f,
+    #feb47b,
+    #6a11cb,
+    #2575fc,
+    #2af598,
+    #9b2af3
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: colorChange 3s linear infinite;
+  filter: blur(8px);
 }
 
 /* Gradient chạy */
 @keyframes colorChange {
-0% {
-background-position: 300% 0%;
-}
-100% {
-background-position: -300% 0%;
-}
+  0% {
+    background-position: 300% 0%;
+  }
+  100% {
+    background-position: -300% 0%;
+  }
 }
 
 .socials a {
@@ -495,9 +495,9 @@ color: red !important;
 </head>
 <body>
 <div class="container">
-<div class="avatar-wrapper">
-<img class="avatar" src="img/Artist HVB.jpg" alt="Avatar" />
-</div>
+  <div class="avatar-wrapper">
+    <img class="avatar" src="img/Artist HVB.jpg" alt="Avatar" />
+  </div>
 <div class="username" data-text="Hoàng Văn Bảo ♬">Hoàng Văn Bảo ♬</div>
 
 <div class="socials">
@@ -594,8 +594,14 @@ const songs = [
 title: "Nước Mắt Muộn Màng",
 src: "audio/Nước Mắt Muộn Màng Ft Khoảng Cách.mp3",
 },
+{ title: "Chỉ Bằng Một Cái Gật Đầu", src: "audio/Chỉ Bằng Một Cái Gật Đầu Remix.mp3" },
+{ title: "Cả Cuộc Đời Này Anh Không Tha Thứ", src: "audio/Cả Cuộc Đời Này Anh Không Tha Thứ Remix.mp3" },
+{ title: "Bông Hoa Nở Muộn", src: "audio/Bông Hoa Nở Muộn Remix.mp3" },
+{ title: "Đổi Tình Đổi Áo Đổi Anh", src: "audio/Đổi Tình Đổi Áo Đổi Anh Remix.mp3" },
+{ title: "Dù Anh Biết Tất Cả Đã Mãi Xa Rồi Remix", src: "audio/Dù Anh Biết Tất Cả Đã Mãi Xa Rồi Remix.mp3" },
+{ title: "Bên Nhau Thật Khó Remix", src: "audio/Bên Nhau Thật Khó Remix.mp3" },
 { title: "Là Anh", src: "audio/Là Anh - Tú Sena.mp3" },
-{ title: "Gặp Mẹ Trong Mer", src: "audio/Gặp Mẹ Trong Mer.mp3" },
+{ title: "Gặp Mẹ Trong Bar", src: "audio/Gặp Mẹ Trong Bar.mp3" },
 {
 title: "Chờ Người Nơi Ấy Remix",
 src: "audio/Chờ Người Nơi Ấy Remix.mp3",
