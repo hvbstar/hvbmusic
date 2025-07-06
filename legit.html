@@ -64,6 +64,15 @@ href="./img/hvbdz-32x32.jpg"
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <style>
+body, html {
+-webkit-user-select: none;
+-ms-user-select: none;
+user-select: none;
+overflow: hidden;
+position: fixed;
+width: 100%;
+height: 100%;
+}
 body {
 margin: 0;
 font-family: 'Roboto', sans-serif;
@@ -78,11 +87,11 @@ user-select: none;
 }
 /* Mặc định toàn bộ trang là con chuột mũi tên custom */
 html, body {
-  cursor: url("https://1.bp.blogspot.com/-qbWo9mPKO2Y/YL9utYdQBdI/AAAAAAAAFs4/mtjGu6u2uGwtJsT4gZG4lbhLV1a5lG6OQCLcBGAsYHQ/s0/mouse-f1.png"), default;
+cursor: url("https://1.bp.blogspot.com/-qbWo9mPKO2Y/YL9utYdQBdI/AAAAAAAAFs4/mtjGu6u2uGwtJsT4gZG4lbhLV1a5lG6OQCLcBGAsYHQ/s0/mouse-f1.png"), default;
 }
 .verified {
-  display: inline-block;
-  cursor: url("https://1.bp.blogspot.com/-qbWo9mPKO2Y/YL9utYdQBdI/AAAAAAAAFs4/mtjGu6u2uGwtJsT4gZG4lbhLV1a5lG6OQCLcBGAsYHQ/s0/mouse-f1.png"), default !important;
+display: inline-block;
+cursor: url("https://1.bp.blogspot.com/-qbWo9mPKO2Y/YL9utYdQBdI/AAAAAAAAFs4/mtjGu6u2uGwtJsT4gZG4lbhLV1a5lG6OQCLcBGAsYHQ/s0/mouse-f1.png"), default !important;
 }
 
 /* Tất cả thành phần có thể click thì đổi thành bàn tay */
@@ -92,7 +101,7 @@ button,
 .back-home,
 input[type="button"],
 input[type="submit"] {
-  cursor: url("https://1.bp.blogspot.com/-nYv2dLl3oXY/YL9utYBCh8I/AAAAAAAAFtA/wII4lVw5w4k-4isGMY41heTqk8U4TJujgCLcBGAsYHQ/s0/mouse-f2.png"), pointer !important;
+cursor: url("https://1.bp.blogspot.com/-nYv2dLl3oXY/YL9utYBCh8I/AAAAAAAAFtA/wII4lVw5w4k-4isGMY41heTqk8U4TJujgCLcBGAsYHQ/s0/mouse-f2.png"), pointer !important;
 }
 .container {
 max-width: 600px;
