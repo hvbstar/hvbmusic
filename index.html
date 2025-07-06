@@ -215,13 +215,65 @@ border-color: #ff0000;
 }
 }
 
+.avatar-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 20px; /* căn giữa và cách dưới */
+}
+
 .avatar {
-width: 120px;
-height: 120px;
-border-radius: 50%;
-object-fit: cover;
-border: 4px solid white;
-margin-bottom: 20px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 2; /* ảnh nằm trên */
+}
+
+/* Viền động nhiều màu */
+.avatar-wrapper::before {
+  content: "";
+  position: absolute;
+  top: -4px; /* độ dày viền */
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #00ff00,
+    #0000ff,
+    #4b0082,
+    #8f00ff,
+    #ff0000
+  );
+  animation: spinBorder 2s linear infinite; /* tốc độ nhanh hơn */
+  z-index: 1;
+  box-shadow:
+    0 0 10px rgba(255, 0, 0, 0.6),
+    0 0 20px rgba(255, 127, 0, 0.6),
+    0 0 30px rgba(0, 255, 0, 0.6);
+}
+
+@keyframes spinBorder {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .username {
@@ -443,7 +495,9 @@ color: red !important;
 </head>
 <body>
 <div class="container">
-<img class="avatar" src="img/Artist HVB.jpg" alt="Avatar" />
+  <div class="avatar-wrapper">
+    <img class="avatar" src="img/Artist HVB.jpg" alt="Avatar" />
+  </div>
 <div class="username" data-text="Hoàng Văn Bảo ♬">Hoàng Văn Bảo ♬</div>
 
 <div class="socials">
