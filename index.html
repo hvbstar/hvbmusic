@@ -1212,6 +1212,49 @@ updatePositions();
 ready(appendSnow);
 </script>
 <script type="text/javascript" src="https://web.nvnstatic.net/js/events/newyear.js"></script>
+<script>
+// Hiệu ứng trái tim rơi
+const colors = ["#ff69b4", "#ff1493", "#db7093", "#ff4500", "#ff0000", "#ff69b4"];
+const numHearts = 10; // 👈 ÍT hơn
+
+const hearts = [];
+
+for (let i = 0; i < numHearts; i++) {
+const heart = document.createElement("div");
+heart.textContent = "❤️";
+heart.style.position = "fixed";
+heart.style.fontSize = "24px";
+heart.style.pointerEvents = "none";
+heart.style.zIndex = "99999";
+heart.style.top = "-30px";
+heart.style.left = `${Math.random() * 100}%`;
+heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+document.body.appendChild(heart);
+hearts.push({
+el: heart,
+x: Math.random() * window.innerWidth,
+y: -30,
+speed: 0.3 + Math.random() * 1, // 👈 Rơi nhẹ hơn
+sway: Math.random() * 50, // 👈 Lắc nhẹ hơn
+});
+}
+
+function animateHearts() {
+hearts.forEach((h) => {
+h.y += h.speed;
+h.x += Math.sin(h.y / 30) * 0.5;
+h.el.style.top = `${h.y}px`;
+h.el.style.left = `${h.x}px`;
+if (h.y > window.innerHeight) {
+h.y = -30;
+h.x = Math.random() * window.innerWidth;
+h.el.style.color = colors[Math.floor(Math.random() * colors.length)];
+}
+});
+requestAnimationFrame(animateHearts);
+}
+animateHearts();
+</script>
 </body>
 </html>
-                                                              <!-- Design By Hoàng Văn Bảo -->
+                                                          <!-- Design By Hoàng Văn Bảo -->
