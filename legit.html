@@ -259,6 +259,14 @@ background: none;
 color: #ff0000;
 font-family: 'Super Mario 256', sans-serif;
 }
+
+@keyframes colorRotate {
+0% { color: #FF0000; }
+25% { color: #00FFFF; }
+50% { color: #00FF00; }
+75% { color: #FFFF00; }
+100% { color: #FF0000; }
+}
 </style>
 </head>
 <body>
@@ -270,6 +278,23 @@ font-family: 'Super Mario 256', sans-serif;
 <div class="info-item">
 <i class="fas fa-user"></i>
 <span class="info-text">Chủ Tài Khoản: <strong>HOÀNG VĂN BẢO</strong></span>
+</div>
+
+<div id="dateCreatedWrapper" style="
+position: fixed;
+bottom: 50px;          /* chỉnh cao/thấp */
+left: 50%;
+transform: translateX(-50%);
+font-family: 'Rowdies', sans-serif;
+font-size: 16px;       /* chỉnh cỡ chữ */
+font-weight: 800;      /* chỉnh độ dày */
+z-index: 9998;        /* cực cao để nằm trên overlay */
+white-space: nowrap;
+">
+<strong style="color: #FF0000;">Date created:&ensp;</strong>
+<span id="momk" style="
+animation: colorRotate 0.8s linear infinite;
+">Loading...</span>
 </div>
 
 <!-- FPS -->
@@ -578,7 +603,7 @@ transform: "translateX(-50%)",
 color: "white",
 fontSize: "14px",
 fontFamily: "Arial, sans-serif",
-zIndex: 9997,
+zIndex: 9998,
 });
 
 el.className = "hvb-copyright rainbow-border";
@@ -621,8 +646,29 @@ throw new Error("Mã bị thay đổi.");
 setTimeout(protect, 100);
 })();
 })();
+
+// Mốc thời gian cố định: 2025-07-07 21:00:00
+const createdDate = new Date("2025-07-07T21:00:00");
+
+function updateTimer() {
+const now = new Date();
+let diff = Math.floor((now - createdDate) / 1000);
+
+const days = Math.floor(diff / (24 * 60 * 60));
+diff %= (24 * 60 * 60);
+const hours = Math.floor(diff / (60 * 60));
+diff %= (60 * 60);
+const minutes = Math.floor(diff / 60);
+const seconds = diff % 60;
+
+document.getElementById("momk").textContent =
+`${days} day ${hours} hour ${minutes} minute ${seconds} second`;
+}
+
+updateTimer();
+setInterval(updateTimer, 1000);
 </script>
 <script type="text/javascript" src="https://web.nvnstatic.net/js/events/newyear.js"></script>
 </body>
 </html>
-                                               <!-- Design By Hoàng Văn Bảo -->
+                                                      <!-- Design By Hoàng Văn Bảo -->
