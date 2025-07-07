@@ -230,17 +230,56 @@ color: #ff00ff;
 text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
 }
 }
+
+/* Phần hiển thị FPS */
+@font-face {
+font-family: 'Super Mario 256';
+src: url('https://raw.githubusercontent.com/hvbstar/hvbmusic/main/img/SuperMario256.ttf') format('truetype');
+font-display: swap;
+}
+
+.fps-counter {
+position: fixed;
+top: 10px;
+left: 10px;
+font-size: 26px;
+font-weight: bold;
+color: red;
+text-shadow: 
+0 0 3px rgba(255, 255, 255, 0.5),  /* Viền sáng trắng nhẹ */
+0 0 6px rgba(255, 255, 255, 0.3);  /* Hiệu ứng phát sáng giảm */
+z-index: 9997;
+padding: 4px 8px;
+min-width: 100px;
+text-align: center;
+background: none;
+}
+
+.fps-value {
+color: #ff0000;
+font-family: 'Super Mario 256', sans-serif;
+}
 </style>
 </head>
 <body>
 <div class="container">
 <h2 class="title-flash" style="text-align:center;">
-<i class="fas fa-lock"></i> THÔNG TIN THANH TOÁN
+<i class="fas fa-lock"></i> Thông Tin Thanh Toán
 </h2>
 
 <div class="info-item">
 <i class="fas fa-user"></i>
 <span class="info-text">Chủ Tài Khoản: <strong>HOÀNG VĂN BẢO</strong></span>
+</div>
+
+<!-- FPS -->
+<div id="fpsCounter" class="fps-counter">
+<span class="fps-value">0.0 FPS</span>
+</div>
+<!-- Bộ đếm lượt truy cập -->
+<div id="visitCounter" class="visit-counter">
+<span id="flame-icon" class="flame-icon">🔥</span>
+<span id="access-count">0</span>
 </div>
 
 <!-- Vietcombank -->
@@ -281,6 +320,33 @@ text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
 </div>
 
 <script>
+// Phần hiển thị FPS
+function updateFPS() {
+let fpsElement = document.querySelector("#fpsCounter .fps-value"); // Lấy phần tử hiển thị FPS
+let lastFrameTime = performance.now();
+let frameCount = 0;
+
+function refreshFPS() {
+let now = performance.now();
+frameCount++;
+
+if (now - lastFrameTime >= 1000) { // Cập nhật mỗi giây
+let fps = Math.round(frameCount / ((now - lastFrameTime) / 1000)); // Chỉ lấy số nguyên
+fpsElement.textContent = `${fps} FPS`;
+lastFrameTime = now;
+frameCount = 0;
+}
+
+requestAnimationFrame(refreshFPS);
+}
+
+refreshFPS();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+updateFPS();
+});
+
 function copyText(text, btn) {
 navigator.clipboard.writeText(text).then(() => {
 btn.innerText = "✓ Đã Copy Thành Công!";
@@ -564,4 +630,4 @@ setTimeout(protect, 100);
 <script type="text/javascript" src="https://web.nvnstatic.net/js/events/newyear.js"></script>
 </body>
 </html>
-                                                        <!-- Design By Hoàng Văn Bảo -->
+                                               <!-- Design By Hoàng Văn Bảo -->
