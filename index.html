@@ -65,7 +65,7 @@ overscroll-behavior: none;
 }
 
 html, body {
-  cursor: url("https://1.bp.blogspot.com/-qbWo9mPKO2Y/YL9utYdQBdI/AAAAAAAAFs4/mtjGu6u2uGwtJsT4gZG4lbhLV1a5lG6OQCLcBGAsYHQ/s0/mouse-f1.png"), default;
+cursor: url("https://1.bp.blogspot.com/-qbWo9mPKO2Y/YL9utYdQBdI/AAAAAAAAFs4/mtjGu6u2uGwtJsT4gZG4lbhLV1a5lG6OQCLcBGAsYHQ/s0/mouse-f1.png"), default;
 }
 /* TẤT CẢ thành phần có thể click */
 a,
@@ -80,7 +80,7 @@ input[type="submit"],
 #volumeIcon,
 .overlay,
 .cursor-click {
-  cursor: url("https://1.bp.blogspot.com/-nYv2dLl3oXY/YL9utYBCh8I/AAAAAAAAFtA/wII4lVw5w4k-4isGMY41heTqk8U4TJujgCLcBGAsYHQ/s0/mouse-f2.png"), pointer !important;
+cursor: url("https://1.bp.blogspot.com/-nYv2dLl3oXY/YL9utYBCh8I/AAAAAAAAFtA/wII4lVw5w4k-4isGMY41heTqk8U4TJujgCLcBGAsYHQ/s0/mouse-f2.png"), pointer !important;
 }
 
 * {
@@ -216,159 +216,159 @@ border-color: #ff0000;
 }
 
 .avatar-wrapper {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+position: relative;
+width: 120px;
+height: 120px;
+border-radius: 50%;
 }
 
 .avatar-wrapper {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin: 0 auto 20px; /* căn giữa và cách dưới */
+position: relative;
+width: 120px;
+height: 120px;
+border-radius: 50%;
+margin: 0 auto 20px; /* căn giữa và cách dưới */
 }
 
 .avatar {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  position: relative;
-  z-index: 2; /* ảnh nằm trên */
+width: 100%;
+height: 100%;
+border-radius: 50%;
+object-fit: cover;
+display: block;
+position: relative;
+z-index: 2; /* ảnh nằm trên */
 }
 
 /* Viền động nhiều màu */
 .avatar-wrapper::before {
-  content: "";
-  position: absolute;
-  top: -4px; /* độ dày viền */
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  border-radius: 50%;
-  background: conic-gradient(
-    #ff0000,
-    #ff7f00,
-    #ffff00,
-    #00ff00,
-    #0000ff,
-    #4b0082,
-    #8f00ff,
-    #ff0000
-  );
-  animation: spinBorder 2s linear infinite; /* tốc độ nhanh hơn */
-  z-index: 1;
-  box-shadow:
-    0 0 10px rgba(255, 0, 0, 0.6),
-    0 0 20px rgba(255, 127, 0, 0.6),
-    0 0 30px rgba(0, 255, 0, 0.6);
+content: "";
+position: absolute;
+top: -4px; /* độ dày viền */
+left: -4px;
+right: -4px;
+bottom: -4px;
+border-radius: 50%;
+background: conic-gradient(
+#ff0000,
+#ff7f00,
+#ffff00,
+#00ff00,
+#0000ff,
+#4b0082,
+#8f00ff,
+#ff0000
+);
+animation: spinBorder 2s linear infinite; /* tốc độ nhanh hơn */
+z-index: 1;
+box-shadow:
+0 0 10px rgba(255, 0, 0, 0.6),
+0 0 20px rgba(255, 127, 0, 0.6),
+0 0 30px rgba(0, 255, 0, 0.6);
 }
 
 @keyframes spinBorder {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+0% {
+transform: rotate(0deg);
+}
+100% {
+transform: rotate(360deg);
+}
 }
 
 .username {
-  position: relative;
-  z-index: 1;
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  background: linear-gradient(
-    90deg,
-    #ff7e5f,
-    #feb47b,
-    #6a11cb,
-    #2575fc,
-    #2af598,
-    #9b2af3
-  );
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: colorChange 3s linear infinite;
+position: relative;
+z-index: 1;
+font-size: 30px;
+font-weight: bold;
+margin-bottom: 20px;
+background: linear-gradient(
+90deg,
+#ff7e5f,
+#feb47b,
+#6a11cb,
+#2575fc,
+#2af598,
+#9b2af3
+);
+background-size: 300% 100%;
+-webkit-background-clip: text;
+color: transparent;
+animation: colorChange 3s linear infinite;
 }
 
 /* Viền sáng nhấp nháy */
 .username::before {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: -1;
-  background: linear-gradient(
-    90deg,
-    #ff7e5f,
-    #feb47b,
-    #6a11cb,
-    #2575fc,
-    #2af598,
-    #9b2af3
-  );
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: colorChange 3s linear infinite;
-  filter: blur(8px);
+content: attr(data-text);
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+z-index: -1;
+background: linear-gradient(
+90deg,
+#ff7e5f,
+#feb47b,
+#6a11cb,
+#2575fc,
+#2af598,
+#9b2af3
+);
+background-size: 300% 100%;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: colorChange 3s linear infinite;
+filter: blur(8px);
 }
 
 /* Gradient chạy */
 @keyframes colorChange {
-  0% {
-    background-position: 300% 0%;
-  }
-  100% {
-    background-position: -300% 0%;
-  }
+0% {
+background-position: 300% 0%;
+}
+100% {
+background-position: -300% 0%;
+}
 }
 
 .socials {
-  margin-bottom: 30px;
+margin-bottom: 30px;
 }
 
 .socials a {
-  margin: 0 10px;
-  color: white;
-  font-size: 22px;
-  position: relative;
-  display: inline-block;
-  transition: 0.3s;
+margin: 0 10px;
+color: white;
+font-size: 22px;
+position: relative;
+display: inline-block;
+transition: 0.3s;
 }
 
 /* Khi hover, tạo màu gradient chạy bên trong */
 .socials a:hover {
-  color: transparent;
-  background: linear-gradient(
-    90deg,
-    #ff7e5f,
-    #feb47b,
-    #6a11cb,
-    #2575fc,
-    #2af598,
-    #9b2af3
-  );
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  animation: socialColor 3s linear infinite;
+color: transparent;
+background: linear-gradient(
+90deg,
+#ff7e5f,
+#feb47b,
+#6a11cb,
+#2575fc,
+#2af598,
+#9b2af3
+);
+background-size: 300% 100%;
+-webkit-background-clip: text;
+animation: socialColor 3s linear infinite;
 }
 
 /* Keyframes cho gradient chạy */
 @keyframes socialColor {
-  0% {
-    background-position: 300% 0%;
-  }
-  100% {
-    background-position: -300% 0%;
-  }
+0% {
+background-position: 300% 0%;
+}
+100% {
+background-position: -300% 0%;
+}
 }
 
 .music-player {
@@ -516,14 +516,54 @@ transition: color 0.3s;
 .volume-muted {
 color: red !important;
 }
+
+/* Phần hiển thị FPS */
+@font-face {
+font-family: 'Super Mario 256';
+src: url('https://raw.githubusercontent.com/hvbstar/hvbmusic/main/img/SuperMario256.ttf') format('truetype');
+font-display: swap;
+}
+
+.fps-counter {
+position: fixed;
+top: 10px;
+left: 10px;
+font-size: 26px;
+font-weight: bold;
+color: red;
+text-shadow: 
+0 0 3px rgba(255, 255, 255, 0.5),  /* Viền sáng trắng nhẹ */
+0 0 6px rgba(255, 255, 255, 0.3);  /* Hiệu ứng phát sáng giảm */
+z-index: 9997;
+padding: 4px 8px;
+min-width: 100px;
+text-align: center;
+background: none;
+}
+
+.fps-value {
+color: #ff0000;
+font-family: 'Super Mario 256', sans-serif;
+}
+
 </style>
 </head>
 <body>
 <div class="container">
-  <div class="avatar-wrapper">
-    <img class="avatar" src="img/Artist HVB.jpg" alt="Avatar" />
-  </div>
+<div class="avatar-wrapper">
+<img class="avatar" src="img/Artist HVB.jpg" alt="Avatar" />
+</div>
 <div class="username" data-text="Hoàng Văn Bảo ♡">Hoàng Văn Bảo ♡</div>
+
+<!-- FPS -->
+<div id="fpsCounter" class="fps-counter">
+<span class="fps-value">0.0 FPS</span>
+</div>
+<!-- Bộ đếm lượt truy cập -->
+<div id="visitCounter" class="visit-counter">
+<span id="flame-icon" class="flame-icon">🔥</span>
+<span id="access-count">0</span>
+</div>
 
 <div class="socials">
 <a href="https://www.facebook.com/HVB.FAQ" target="_blank"
@@ -606,6 +646,34 @@ title="Âm lượng"
 </div>
 
 <script>
+
+// Phần hiển thị FPS
+function updateFPS() {
+let fpsElement = document.querySelector("#fpsCounter .fps-value"); // Lấy phần tử hiển thị FPS
+let lastFrameTime = performance.now();
+let frameCount = 0;
+
+function refreshFPS() {
+let now = performance.now();
+frameCount++;
+
+if (now - lastFrameTime >= 1000) { // Cập nhật mỗi giây
+let fps = Math.round(frameCount / ((now - lastFrameTime) / 1000)); // Chỉ lấy số nguyên
+fpsElement.textContent = `${fps} FPS`;
+lastFrameTime = now;
+frameCount = 0;
+}
+
+requestAnimationFrame(refreshFPS);
+}
+
+refreshFPS();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+updateFPS();
+});
+
 const audio = document.getElementById("audio");
 const playBtn = document.getElementById("play-btn");
 const progress = document.getElementById("progress");
