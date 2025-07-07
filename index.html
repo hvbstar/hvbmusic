@@ -331,19 +331,44 @@ border-color: #ff0000;
   }
 }
 
-.socials a {
-margin: 0 10px;
-color: white;
-font-size: 22px;
-transition: 0.3s;
-}
-
-.socials a:hover {
-color: #ffd700;
-}
-
 .socials {
-margin-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.socials a {
+  margin: 0 10px;
+  color: white;
+  font-size: 22px;
+  position: relative;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+/* Khi hover, tạo màu gradient chạy bên trong */
+.socials a:hover {
+  color: transparent;
+  background: linear-gradient(
+    90deg,
+    #ff7e5f,
+    #feb47b,
+    #6a11cb,
+    #2575fc,
+    #2af598,
+    #9b2af3
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  animation: socialColor 3s linear infinite;
+}
+
+/* Keyframes cho gradient chạy */
+@keyframes socialColor {
+  0% {
+    background-position: 300% 0%;
+  }
+  100% {
+    background-position: -300% 0%;
+  }
 }
 
 .music-player {
@@ -498,7 +523,7 @@ color: red !important;
   <div class="avatar-wrapper">
     <img class="avatar" src="img/Artist HVB.jpg" alt="Avatar" />
   </div>
-<div class="username" data-text="Hoàng Văn Bảo ✓">Hoàng Văn Bảo ✓</div>
+<div class="username" data-text="Hoàng Văn Bảo ♡">Hoàng Văn Bảo ♡</div>
 
 <div class="socials">
 <a href="https://www.facebook.com/HVB.FAQ" target="_blank"
