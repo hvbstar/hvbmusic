@@ -45,13 +45,13 @@ rel="stylesheet"
 <link
 rel="apple-touch-icon"
 sizes="180x180"
-href="./img/hvbdz-180x180.jpg"
+href="./img/hvbwibu-180x180.jpg"
 />
 <link
 rel="icon"
 type="image/jpg"
 sizes="32x32"
-href="./img/hvbdz-32x32.jpg"
+href="./img/hvbwibuhvbwibu-32x32.jpg"
 />
 <link rel="manifest" href="site.webmanifest" />
 
@@ -1254,6 +1254,60 @@ h.el.style.color = colors[Math.floor(Math.random() * colors.length)];
 requestAnimationFrame(animateHearts);
 }
 animateHearts();
+</script>
+<script>
+(async () => {
+let wakeLock = null;
+
+// Với các trình duyệt hỗ trợ Wake Lock (Chrome, Edge, Samsung Internet...)
+async function requestWakeLock() {
+try {
+wakeLock = await navigator.wakeLock.request('screen');
+console.log('✅ Wake Lock đã bật');
+wakeLock.addEventListener('release', () => {
+console.warn('🔁 Wake Lock bị mất, đang yêu cầu lại...');
+requestWakeLock();
+});
+} catch (err) {
+console.error('Wake Lock error:', err);
+}
+}
+
+if ('wakeLock' in navigator) {
+requestWakeLock();
+document.addEventListener('visibilitychange', () => {
+if (wakeLock !== null && document.visibilityState === 'visible') {
+requestWakeLock();
+}
+});
+} else {
+// Nếu trình duyệt không hỗ trợ (Safari/iOS...), dùng mẹo phát video im lặng
+const video = document.createElement('video');
+video.setAttribute('playsinline', '');
+video.setAttribute('muted', '');
+video.setAttribute('loop', '');
+video.style.display = 'none';
+
+const blob = new Blob([new Uint8Array([0x00])], { type: 'video/mp4' });
+const videoUrl = URL.createObjectURL(blob);
+video.src = videoUrl;
+
+document.body.appendChild(video);
+
+const tryPlay = () => {
+video.play().catch(err => {
+console.warn('iOS video autoplay block:', err);
+});
+};
+
+// Phát lại khi người dùng tương tác
+document.addEventListener('click', tryPlay, { once: true });
+document.addEventListener('touchstart', tryPlay, { once: true });
+
+// Thử phát ngay nếu được
+tryPlay();
+}
+})();
 </script>
 </body>
 </html>
