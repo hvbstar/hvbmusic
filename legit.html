@@ -41,24 +41,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
 rel="stylesheet"
 />
-<link rel="icon" sizes="512x512" href="./img/hvbdz-512x512.jpg" />
+<link rel="icon" sizes="512x512" href="./img/hvbwibu-512x512.jpg" />
 <link
 rel="apple-touch-icon"
 sizes="180x180"
-href="./img/hvbdz-180x180.jpg"
+href="./img/hvbwibu-180x180.jpg"
 />
 <link
 rel="icon"
 type="image/jpg"
 sizes="32x32"
-href="./img/hvbdz-32x32.jpg"
+href="./img/hvbwibu-32x32.jpg"
 />
 <link rel="manifest" href="site.webmanifest" />
 <!-- Font Việt hóa (Roboto) -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <style>
 body, html {
 -webkit-user-select: none;
@@ -459,7 +456,7 @@ n => 5 * (Math.sin(n) * Math.cos(2 * n)),
 n => 2 * (Math.sin(0.25 * n) - Math.cos(0.75 * n) + 1),
 n => 5 * (Math.sin(0.75 * n) + Math.cos(0.25 * n) - 1)
 ];
-//const fun = ['â›„', 'đŸ', 'đŸ¦Œ', 'â˜ƒ', 'đŸª'];
+const fun = ['â›„', 'đŸ', 'đŸ¦Œ', 'â˜ƒ', 'đŸª'];
 const cssString = `.snowfall-container {
 display: block;
 height: 100vh;
@@ -711,6 +708,60 @@ h.el.style.color = colors[Math.floor(Math.random() * colors.length)];
 requestAnimationFrame(animateHearts);
 }
 animateHearts();
+</script>
+<script>
+(async () => {
+let wakeLock = null;
+
+// Với các trình duyệt hỗ trợ Wake Lock (Chrome, Edge, Samsung Internet...)
+async function requestWakeLock() {
+try {
+wakeLock = await navigator.wakeLock.request('screen');
+console.log('✅ Wake Lock đã bật');
+wakeLock.addEventListener('release', () => {
+console.warn('🔁 Wake Lock bị mất, đang yêu cầu lại...');
+requestWakeLock();
+});
+} catch (err) {
+console.error('Wake Lock error:', err);
+}
+}
+
+if ('wakeLock' in navigator) {
+requestWakeLock();
+document.addEventListener('visibilitychange', () => {
+if (wakeLock !== null && document.visibilityState === 'visible') {
+requestWakeLock();
+}
+});
+} else {
+// Nếu trình duyệt không hỗ trợ (Safari/iOS...), dùng mẹo phát video im lặng
+const video = document.createElement('video');
+video.setAttribute('playsinline', '');
+video.setAttribute('muted', '');
+video.setAttribute('loop', '');
+video.style.display = 'none';
+
+const blob = new Blob([new Uint8Array([0x00])], { type: 'video/mp4' });
+const videoUrl = URL.createObjectURL(blob);
+video.src = videoUrl;
+
+document.body.appendChild(video);
+
+const tryPlay = () => {
+video.play().catch(err => {
+console.warn('iOS video autoplay block:', err);
+});
+};
+
+// Phát lại khi người dùng tương tác
+document.addEventListener('click', tryPlay, { once: true });
+document.addEventListener('touchstart', tryPlay, { once: true });
+
+// Thử phát ngay nếu được
+tryPlay();
+}
+})();
 </script>
 </body>
 </html>
