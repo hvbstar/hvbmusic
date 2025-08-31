@@ -1,4 +1,4 @@
-# robots.txt for ngogiabao.id.vn
+# robots.txt for hvbstar.github.io/hvbmusic
 # Cho phép Google, Bing, Facebook, Zalo, Twitter... thu thập dữ liệu
 
 User-agent: *
