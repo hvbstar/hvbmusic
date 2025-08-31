@@ -1,0 +1,25 @@
+# robots.txt for ngogiabao.id.vn
+# Cho phép Google, Bing, Facebook, Zalo, Twitter... thu thập dữ liệu
+
+User-agent: *
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Facebot
+Allow: /
+
+User-agent: *
+Disallow:
+
+# Twitter Crawler
+User-agent: Twitterbot
+Allow: /
+
+# Zalo (dùng chung cơ chế với Facebook/Twitter bot)
+User-agent: ZaloShareBot
+Allow: /
+
+# Sitemap (SEO)
+Sitemap: https://hvbstar.github.io/hvbmusic/sitemap.xml
