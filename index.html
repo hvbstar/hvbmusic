@@ -1542,10 +1542,7 @@ const duration = document.getElementById("duration");
 const title = document.getElementById("song-title");
 
 const songs = [
-{
-title: "Nước Mắt Muộn Màng",
-src: "audio/Nước Mắt Muộn Màng Ft Khoảng Cách.mp3",
-},
+{ title: "Nước Mắt Muộn Màng",src: "audio/Nước Mắt Muộn Màng Ft Khoảng Cách.mp3" },
 { title: "Chỉ Bằng Một Cái Gật Đầu", src: "audio/Chỉ Bằng Một Cái Gật Đầu Remix.mp3" },
 { title: "Cả Cuộc Đời Này Anh Không Tha Thứ", src: "audio/Cả Cuộc Đời Này Anh Không Tha Thứ Remix.mp3" },
 { title: "Bông Hoa Nở Muộn", src: "audio/Bông Hoa Nở Muộn Remix.mp3" },
@@ -1554,18 +1551,9 @@ src: "audio/Nước Mắt Muộn Màng Ft Khoảng Cách.mp3",
 { title: "Bên Nhau Thật Khó Remix", src: "audio/Bên Nhau Thật Khó Remix.mp3" },
 { title: "Là Anh", src: "audio/Là Anh - Tú Sena.mp3" },
 { title: "Gặp Mẹ Trong Bar", src: "audio/Gặp Mẹ Trong Bar.mp3" },
-{
-title: "Chờ Người Nơi Ấy Remix",
-src: "audio/Chờ Người Nơi Ấy Remix.mp3",
-},
-{
-title: "Biết Đau Nhưng Vẫn Yêu",
-src: "audio/Biết Đau Nhưng Vẫn Yêu.mp3",
-},
-{
-title: "Có Anh Ở Đây Rồi Remix",
-src: "audio/Có Anh Ở Đây Rồi - Slex Remix.mp3",
-},
+{ title: "Chờ Người Nơi Ấy Remix", src: "audio/Chờ Người Nơi Ấy Remix.mp3" },
+{title: "Biết Đau Nhưng Vẫn Yêu", src: "audio/Biết Đau Nhưng Vẫn Yêu.mp3" },
+{ title: "Có Anh Ở Đây Rồi Remix", src: "audio/Có Anh Ở Đây Rồi - Slex Remix.mp3" },
 ];
 let currentIndex = 0;
 let isPlaying = false;
@@ -1591,11 +1579,12 @@ duration.textContent = formatTime(audio.duration);
 }
 
 function formatTime(t) {
-const min = Math.floor(t / 60);
-const sec = Math.floor(t % 60)
-.toString()
-.padStart(2, "0");
-return `${min}:${sec}`;
+const hrs = Math.floor(t / 3600);
+const mins = Math.floor((t % 3600) / 60);
+const secs = Math.floor(t % 60).toString().padStart(2, "0");
+return hrs > 0
+? `${hrs}:${mins.toString().padStart(2, "0")}:${secs}`
+: `${mins}:${secs}`;
 }
 
 function seek(e) {
@@ -2449,4 +2438,4 @@ var requestAnimationFrame=window.requestAnimationFrame||window.mozRequestAnimati
 </script>
 </body>
 </html>
-                                               <!-- Design By Hoàng Văn Bảo -->
+                                         <!-- Design By Hoàng Văn Bảo -->
