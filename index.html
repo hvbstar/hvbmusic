@@ -597,9 +597,99 @@ font-family: 'Super Mario 256', sans-serif;
 75%{text-shadow:0 0 6px #ff00ff,0 0 12px #ff0000,0 0 18px #00ff00,0 0 24px #ffff00;}
 100%{text-shadow:0 0 5px #ff0000,0 0 10px #ffff00,0 0 15px #00ffff,0 0 20px #ff00ff;}
 }
+
+/* Hiệu ứng lá cờ VN tung bay */
+/* --- BIẾN SỐ CHUNG --- */
+:root {
+--glow-color: #ffd700; /* Màu vàng cơ bản cho hiệu ứng sáng */
+}
+
+/* Định dạng cơ bản (Nền tối để làm nổi bật hiệu ứng Glow) */
+body {
+margin: 0; padding: 0; min-height: 100vh;
+display: flex; flex-direction: column; align-items: center;
+background-color: #0d1117; 
+overflow-x: hidden; position: relative; 
+/* font-family: sans-serif; color: #f0f0f0; */
+}
+
+/* --- VỊ TRÍ CỜ (CÂN XỨNG VỚI FPS VÀ COUNTER) --- */
+.flag-container {
+position: absolute; 
+top: 8px; /* Cân xứng theo chiều dọc với các bộ đếm ở hai bên */
+left: 50%;
+transform: translateX(-50%); /* Căn giữa tuyệt đối */
+z-index: 100;
+}
+
+#vietnamFlagCanvas {
+display: block;
+width: 200px; height: 100px; /* Kích thước cờ hiển thị */
+border-radius: 8px;
+
+/* Áp dụng hiệu ứng nháy sáng nhiều màu */
+animation: multi-color-glow 2.5s linear infinite alternate; 
+}
+
+/* --- @KEYFRAMES HIỆU ỨNG NHÁY SÁNG RỰC RỠ NHẤT --- */
+@keyframes multi-color-glow {
+/* Tăng cường độ sáng (box-shadow rộng và filter > 1.0) */
+0% { 
+box-shadow: 
+0 0 20px rgba(255, 0, 0, 1.0),   /* Đỏ rực chói */
+0 0 40px rgba(255, 0, 255, 1.0); /* Hồng rực chói */
+filter: brightness(1.3); /* Làm lá cờ sáng bừng */
+}
+25% { 
+box-shadow: 
+0 0 20px rgba(255, 255, 0, 1.0),  /* Vàng rực chói */
+0 0 40px rgba(0, 255, 255, 1.0);  /* Xanh ngọc rực chói */
+filter: brightness(1.4); 
+}
+50% { 
+box-shadow: 
+0 0 20px rgba(0, 255, 0, 1.0),   /* Xanh lá rực chói */
+0 0 40px rgba(0, 0, 255, 1.0);   /* Xanh dương rực chói */
+filter: brightness(1.3); 
+}
+75% { 
+box-shadow: 
+0 0 20px rgba(255, 0, 255, 1.0), /* Tím rực chói */
+0 0 40px rgba(255, 165, 0, 1.0); /* Cam rực chói */
+filter: brightness(1.4); 
+}
+100% { 
+box-shadow: 
+0 0 20px rgba(255, 0, 0, 1.0),
+0 0 40px rgba(255, 0, 255, 1.0);
+filter: brightness(1.3); 
+}
+}
+
+/* --- HIỆU ỨNG HẠT LẤP LÁNH NỀN --- */
+.sparkle {
+position: absolute;
+background: radial-gradient(circle at center, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)); 
+border-radius: 50%; opacity: 0; pointer-events: none;
+animation: sparkle-fall linear infinite;
+}
+
+@keyframes sparkle-fall {
+0% { transform: translateY(-50px) scale(0); opacity: 0; }
+10% { opacity: 0.8; transform: scale(1); }
+100% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+}
 </style>
 </head>
 <body>
+
+<!-- Lá Cờ VN Tung Bay -->
+<div class="flag-container">
+<canvas id="vietnamFlagCanvas" width="240" height="160"></canvas>
+</div>
+
+<div id="particle-overlay"></div>
+
 <!-- Bộ đếm truy cập -->
 <div id="counter-wrapper" style="position:fixed;top:20px;right:20px;z-index:9997;font-size:28px;font-weight:bold;text-align:center;color:#ff0000;text-shadow:0 0 5px #ff0000,0 0 10px #ffff00,0 0 15px #00ffff,0 0 20px #ff00ff;animation:nglow 2s infinite alternate;">
 <script type="text/javascript" src="https://www.free-counters.org/count/iyym"></script><br>
@@ -2468,7 +2558,106 @@ a.setAttribute('target','_blank');
 a.setAttribute('rel','noopener');
 }
 }, 1000);
+
+// Phần Lá Cờ VN Tung Bay
+document.addEventListener('DOMContentLoaded', () => {
+// --- KHỞI TẠO CANVAS VÀ MÀU SẮC ---
+const canvas = document.getElementById('vietnamFlagCanvas');
+const ctx = canvas.getContext('2d');
+const W = canvas.width; // 240px
+const H = canvas.height; // 160px
+
+const RED = 'rgb(218, 37, 29)';
+const YELLOW = 'rgb(255, 210, 0)';
+
+// --- CÁC THAM SỐ GỢN SÓNG (ĐIỀU CHỈNH TẠI ĐÂY) ---
+let tick = 0;
+const waveAmplitude = 6; // Biên độ sóng (Chiều cao sóng - Gió mạnh: 20, Gió nhẹ: 5)
+const waveLength = 30;    // Độ dài sóng (Khoảng cách giữa các đỉnh sóng - Sóng ngắn: 15, Sóng dài: 40)
+const waveSpeed = 0.2;    // Tốc độ di chuyển của sóng (Tốc độ tung bay)
+
+// --- HÀM VẼ NGÔI SAO ---
+function drawStar(ctx, cx, cy, R, color) {
+ctx.fillStyle = color;
+ctx.beginPath();
+let n = 5;
+let r_inner = R * 0.382; // Tỷ lệ ngôi sao 5 cánh chuẩn
+for (let i = 0; i < n * 2; i++) {
+let r = i % 2 === 0 ? R : r_inner;
+let angle = (Math.PI / n) * i - Math.PI / 2;
+let x = cx + r * Math.cos(angle);
+let y = cy + r * Math.sin(angle);
+if (i === 0) ctx.moveTo(x, y);
+else ctx.lineTo(x, y);
+}
+ctx.closePath();
+ctx.fill();
+}
+
+// --- VÒNG LẶP CHÍNH (VẼ CỜ GỢN SÓNG VÀ CHỮ) ---
+function drawWavingFlag() {
+ctx.clearRect(0, 0, W, H);
+
+// Tạo cờ phẳng (buffer) để lấy pixel từng cột
+let flatFlag = document.createElement('canvas');
+flatFlag.width = W; flatFlag.height = H;
+let flatCtx = flatFlag.getContext('2d');
+
+// Vẽ nền đỏ phẳng
+flatCtx.fillStyle = RED;
+flatCtx.fillRect(0, 0, W, H);
+
+// Vẽ ngôi sao vàng phẳng
+drawStar(flatCtx, W / 2, H / 2, 35, YELLOW); 
+
+// --- VẼ CHỮ "Tôi Yêu Việt Nam" (ĐÃ ĐIỀU CHỈNH KÍCH THƯỚC VÀ VỊ TRÍ) ---
+flatCtx.font = 'bold 20px Arial'; // GIẢM CỠ CHỮ từ 24px xuống 18px
+flatCtx.fillStyle = 'white';     
+flatCtx.textAlign = 'center';    
+flatCtx.textBaseline = 'middle'; 
+
+// Vị trí chữ: Dịch lên trên một chút so với ngôi sao
+// H/2 + 30 -> H/2 + 20 (dịch lên 10px so với trước)
+flatCtx.fillText('Tôi Yêu Việt Nam', W / 2, H / 2 + 50); 
+// ------------------------------------
+
+// Tái tạo hiệu ứng sóng bằng cách dịch chuyển từng cột pixel
+for (let x = 0; x < W; x++) {
+let offset = waveAmplitude * Math.sin(x / waveLength + tick);
+let column = flatCtx.getImageData(x, 0, 1, H);
+ctx.putImageData(column, x, offset);
+}
+
+tick += waveSpeed; 
+requestAnimationFrame(drawWavingFlag);
+}
+drawWavingFlag();
+
+// --- SPARKLE BACKGROUND ANIMATION (Giữ nguyên) ---
+const particleOverlay = document.getElementById('particle-overlay');
+const numberOfSparkles = 70;
+
+function createSparkle() {
+const sparkle = document.createElement('div');
+sparkle.classList.add('sparkle');
+
+const size = Math.random() * 2 + 1.5; 
+sparkle.style.width = `${size}px`;
+sparkle.style.height = `${size}px`;
+sparkle.style.left = `${Math.random() * 100}vw`;
+
+const duration = Math.random() * 8 + 4; 
+const delay = Math.random() * 5; 
+sparkle.style.animationDuration = `${duration}s`;
+sparkle.style.animationDelay = `${delay}s`;
+
+particleOverlay.appendChild(sparkle);
+}
+for (let i = 0; i < numberOfSparkles; i++) {
+createSparkle();
+}
+});
 </script>
 </body>
 </html>
-                                                   <!-- Design By Hoàng Văn Bảo -->
+                                                         <!-- Design By Hoàng Văn Bảo -->
