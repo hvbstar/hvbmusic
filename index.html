@@ -374,6 +374,17 @@ display: inline-block;
 transition: 0.3s;
 }
 
+/* --- Cấu hình cho Wave Canvas (Visualizer) --- */
+#waveCanvas { 
+position: fixed; 
+top: auto; 
+bottom: 0; 
+left: 0;
+width: 100%;
+height: 140px; 
+z-index: 1; /* Đảm bảo nó nằm phía sau giao diện người dùng */
+}
+
 /* Khi hover, tạo màu gradient chạy bên trong */
 .socials a:hover {
 color: transparent;
@@ -762,6 +773,10 @@ target="_blank"
 <div class="payment-box">
 <a href="legit.html" target="_blank">Thông Tin Thanh Toán</a>
 </div>
+
+<canvas id="waveCanvas"></canvas> 
+
+<audio id="audio"></audio> 
 
 <div class="music-player">
 <img class="cover" src="img/AVT Nghệ Sĩ.jpg" alt="Cover" />
@@ -1638,6 +1653,93 @@ document.addEventListener("DOMContentLoaded", function () {
 updateFPS();
 });
 
+/* =========================================================
+CHÚ Ý: ĐOẠN MÃ JAVASCRIPT ĐÃ ĐƯỢC HỢP NHẤT VÀ SỬA LỖI 
+=========================================================
+*/
+
+// =============================================================
+// I. CÁC BIẾN VÀ HÀM CHO VISUALIZER (Sóng Cầu Vồng Chạy)
+// =============================================================
+
+const waveCanvas = document.getElementById('waveCanvas');
+const wctx = waveCanvas.getContext('2d');
+let audioCtx, analyser, dataArray, source; // Biến cho Web Audio API
+let hueOffset = 0; // Biến dùng cho hiệu ứng cầu vồng chạy
+
+// Hàm điều chỉnh kích thước Canvas
+function resizeWaveCanvas() {
+waveCanvas.width = window.innerWidth;
+waveCanvas.height = 140; 
+}
+window.addEventListener('resize', resizeWaveCanvas);
+resizeWaveCanvas();
+
+// HÀM KHỞI TẠO VISUALIZER
+function initVisualizer(){
+if(audioCtx) return; 
+try {
+audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+// 💡 KẾT NỐI: Dùng biến 'audio' từ playlist
+source = audioCtx.createMediaElementSource(audio); 
+
+analyser = audioCtx.createAnalyser();
+analyser.fftSize = 256; 
+
+source.connect(analyser);
+analyser.connect(audioCtx.destination);
+
+dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+drawWave();
+} catch (e) {
+console.error("Lỗi khởi tạo AudioContext:", e);
+}
+}
+
+// HÀM VẼ SÓNG ÂM THANH (HIỆU ỨNG CẦU VỒNG CHẠY)
+function drawWave(){
+requestAnimationFrame(drawWave); 
+
+if (!analyser || !dataArray) return;
+
+analyser.getByteFrequencyData(dataArray);
+wctx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+
+const bufferLength = analyser.frequencyBinCount;
+const barWidth = (waveCanvas.width / bufferLength) * 1.5; 
+let barHeight;
+let x = 0; 
+
+// Tăng độ dịch chuyển màu (Tạo hiệu ứng chạy)
+hueOffset = (hueOffset + 1.5) % 360; // Tốc độ dịch chuyển 1.5 đơn vị mỗi frame
+
+for(let i = 0; i < bufferLength; i++) {
+barHeight = dataArray[i] / 2;
+
+// Tính toán Hue: vị trí + dịch chuyển theo thời gian
+const hue = (i * 1.5) + hueOffset; 
+
+// Gán màu HSL (Sắc thái màu, 80% độ bão hòa, 50% độ sáng)
+wctx.fillStyle = `hsl(${hue % 360}, 80%, 50%)`; 
+
+wctx.fillRect(
+x, 
+waveCanvas.height - barHeight,
+barWidth, 
+barHeight
+);
+x += barWidth + 1;
+}
+}
+
+
+// =============================================================
+// II. CÁC BIẾN VÀ HÀM CHO PLAYLIST & VOLUME 
+// =============================================================
+
+// Khai báo biến Playlist
 const audio = document.getElementById("audio");
 const playBtn = document.getElementById("play-btn");
 const progress = document.getElementById("progress");
@@ -1646,8 +1748,12 @@ const current = document.getElementById("current");
 const duration = document.getElementById("duration");
 const title = document.getElementById("song-title");
 
+// Khai báo biến Volume
+const volumeControl = document.getElementById("volumeControl");
+const volumeIcon = document.getElementById("volumeIcon");
+
 const songs = [
-{ title: "Nước Mắt Muộn Màng",src: "audio/Nước Mắt Muộn Màng Ft Khoảng Cách.mp3" },
+{ title: "Nước Mắt Muộn Màng", src: "audio/Nước Mắt Muộn Màng Ft Khoảng Cách.mp3", },
 { title: "Chỉ Bằng Một Cái Gật Đầu", src: "audio/Chỉ Bằng Một Cái Gật Đầu Remix.mp3" },
 { title: "Cả Cuộc Đời Này Anh Không Tha Thứ", src: "audio/Cả Cuộc Đời Này Anh Không Tha Thứ Remix.mp3" },
 { title: "Bông Hoa Nở Muộn", src: "audio/Bông Hoa Nở Muộn Remix.mp3" },
@@ -1656,13 +1762,14 @@ const songs = [
 { title: "Bên Nhau Thật Khó Remix", src: "audio/Bên Nhau Thật Khó Remix.mp3" },
 { title: "Là Anh", src: "audio/Là Anh - Tú Sena.mp3" },
 { title: "Gặp Mẹ Trong Bar", src: "audio/Gặp Mẹ Trong Bar.mp3" },
-{ title: "Chờ Người Nơi Ấy Remix", src: "audio/Chờ Người Nơi Ấy Remix.mp3" },
-{title: "Biết Đau Nhưng Vẫn Yêu", src: "audio/Biết Đau Nhưng Vẫn Yêu.mp3" },
-{ title: "Có Anh Ở Đây Rồi Remix", src: "audio/Có Anh Ở Đây Rồi - Slex Remix.mp3" },
+{ title: "Chờ Người Nơi Ấy Remix", src: "audio/Chờ Người Nơi Ấy Remix.mp3", },
+{ title: "Biết Đau Nhưng Vẫn Yêu", src: "audio/Biết Đau Nhưng Vẫn Yêu.mp3", },
+{ title: "Có Anh Ở Đây Rồi Remix", src: "audio/Có Anh Ở Đây Rồi - Slex Remix.mp3", },
 ];
 let currentIndex = 0;
 let isPlaying = false;
 
+// Các hàm Playlist
 function togglePlay() {
 if (audio.paused) {
 audio.play();
@@ -1731,6 +1838,25 @@ playBtn.innerHTML = '<i class="fas fa-play"></i>';
 };
 }
 
+// Các hàm Volume
+function updateVolumeIcon() {
+if (audio.muted || parseFloat(volumeControl.value) <= 0.01) {
+volumeIcon.classList.remove("fa-volume-up");
+volumeIcon.classList.add("fa-volume-mute", "volume-muted");
+} else {
+volumeIcon.classList.add("fa-volume-up");
+volumeIcon.classList.remove("fa-volume-mute", "volume-muted");
+}
+}
+
+// =============================================================
+// III. LISTENERS & KHỞI ĐỘNG 
+// =============================================================
+
+// 💡 KÍCH HOẠT VISUALIZER: Gọi initVisualizer khi audio bắt đầu play
+audio.addEventListener('play', initVisualizer); 
+
+// Listeners của Playlist
 audio.addEventListener("timeupdate", updateProgress);
 audio.addEventListener("ended", nextSong);
 audio.addEventListener("loadedmetadata", () => {
@@ -1738,28 +1864,16 @@ if (!isNaN(audio.duration)) {
 duration.textContent = formatTime(audio.duration);
 }
 });
-loadSong(currentIndex);
 
-// JS PHẦN VOLUME
-const volumeControl = document.getElementById("volumeControl");
-const volumeIcon = document.getElementById("volumeIcon");
-
-// Gán sự kiện khi kéo volume
+// Listeners của Volume
 volumeControl.addEventListener("input", () => {
 const vol = parseFloat(volumeControl.value);
 
-// Cập nhật âm lượng cho PC (nếu hỗ trợ)
 if (typeof audio.volume === "number") {
-try {
-audio.volume = vol;
-} catch (e) {
-console.warn("Không thể thay đổi volume:", e);
-}
+try { audio.volume = vol; } catch (e) { console.warn("Không thể thay đổi volume:", e); }
 }
 
-// Cập nhật muted cho mọi nền tảng
 audio.muted = vol <= 0.01;
-
 updateVolumeIcon();
 });
 
@@ -1770,40 +1884,19 @@ if (isMuted) {
 audio.muted = false;
 volumeControl.value = 1;
 
-// Thử set lại volume cho PC
-if (typeof audio.volume === "number") {
-try {
-audio.volume = 1;
-} catch (e) {
-console.warn("Không thể bật lại volume:", e);
-}
-}
+if (typeof audio.volume === "number") { try { audio.volume = 1; } catch (e) { console.warn("Không thể bật lại volume:", e); } }
 } else {
 audio.muted = true;
 volumeControl.value = 0;
 
-// PC vẫn nên set volume = 0 nếu được
-if (typeof audio.volume === "number") {
-try {
-audio.volume = 0;
-} catch (e) {
-console.warn("Không thể tắt volume:", e);
+if (typeof audio.volume === "number") { try { audio.volume = 0; } catch (e) { console.warn("Không thể tắt volume:", e); } }
 }
-}
-}
-
 updateVolumeIcon();
 });
 
-function updateVolumeIcon() {
-if (audio.muted || parseFloat(volumeControl.value) <= 0.01) {
-volumeIcon.classList.remove("fa-volume-up");
-volumeIcon.classList.add("fa-volume-mute", "volume-muted");
-} else {
-volumeIcon.classList.add("fa-volume-up");
-volumeIcon.classList.remove("fa-volume-mute", "volume-muted");
-}
-}
+// Khởi động Playlist khi trang tải xong
+loadSong(currentIndex);
+updateVolumeIcon();
 </script>
 <script>
 // CHẶN CHUỘT PHẢI VÀ CHỌN VĂN BẢN
@@ -2660,4 +2753,4 @@ createSparkle();
 </script>
 </body>
 </html>
-                                                         <!-- Design By Hoàng Văn Bảo -->
+                                                   <!-- Design By Hoàng Văn Bảo -->
