@@ -600,15 +600,6 @@ font-family: 'Super Mario 256', sans-serif;
 .snowflake{padding-left:15px;font-size:14px;line-height:24px;position:fixed;color:#ebebeb;user-select:none;z-index:10000;-moz-user-select:none;-ms-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
 .snowflake:hover {cursor:default}
 
-/* Bộ đếm truy cập */
-@keyframes nglow{
-0%{text-shadow:0 0 5px #ff0000,0 0 10px #ffff00,0 0 15px #00ffff,0 0 20px #ff00ff;}
-25%{text-shadow:0 0 6px #ff9900,0 0 12px #00ff00,0 0 18px #ff00ff,0 0 24px #ffff00;}
-50%{text-shadow:0 0 7px #00ffff,0 0 14px #ff00ff,0 0 21px #ffff00,0 0 28px #ff0000;}
-75%{text-shadow:0 0 6px #ff00ff,0 0 12px #ff0000,0 0 18px #00ff00,0 0 24px #ffff00;}
-100%{text-shadow:0 0 5px #ff0000,0 0 10px #ffff00,0 0 15px #00ffff,0 0 20px #ff00ff;}
-}
-
 /* Hiệu ứng lá cờ VN tung bay */
 /* --- BIẾN SỐ CHUNG --- */
 :root {
@@ -700,13 +691,6 @@ animation: sparkle-fall linear infinite;
 </div>
 
 <div id="particle-overlay"></div>
-
-<!-- Bộ đếm truy cập -->
-<div id="counter-wrapper" style="position:fixed;top:20px;right:20px;z-index:9997;font-size:28px;font-weight:bold;text-align:center;color:#ff0000;text-shadow:0 0 5px #ff0000,0 0 10px #ffff00,0 0 15px #00ffff,0 0 20px #ff00ff;animation:nglow 2s infinite alternate;">
-<script type="text/javascript" src="https://www.free-counters.org/count/iyym"></script><br>
-<a href="https://www.acadoo.de/leistungen/ghostwriter-doktorarbeit/" style="color:inherit;text-decoration:none;display:block;">Dissertation schreiben</a>
-<script type="text/javascript" src="https://www.whomania.com/ctr?id=eb6291942687597bfc83f6cd6e9caafe1aafc82b"></script>
-</div>
 
 <div class="container">
 <div class="avatar-wrapper">
@@ -2630,14 +2614,6 @@ gl_FragColor.a = 1.0;
 //<![CDATA[
 var requestAnimationFrame=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||window.msRequestAnimationFrame;var transforms=["transform","msTransform","webkitTransform","mozTransform","oTransform"];var transformProperty=getSupportedPropertyName(transforms);var snowflakes=[];var browserWidth;var browserHeight;var numberOfSnowflakes=50;var resetPosition=false;function setup(){window.addEventListener("DOMContentLoaded",generateSnowflakes,false);window.addEventListener("resize",setResetFlag,false)}setup();function getSupportedPropertyName(b){for(var a=0;a<b.length;a++){if(typeof document.body.style[b[a]]!="undefined"){return b[a]}}return null}function Snowflake(b,a,d,e,c){this.element=b;this.radius=a;this.speed=d;this.xPos=e;this.yPos=c;this.counter=0;this.sign=Math.random()<0.5?1:-1;this.element.style.opacity=0.5+Math.random();this.element.style.fontSize=4+Math.random()*30+"px"}Snowflake.prototype.update=function(){this.counter+=this.speed/5000;this.xPos+=this.sign*this.speed*Math.cos(this.counter)/40;this.yPos+=Math.sin(this.counter)/40+this.speed/30;setTranslate3DTransform(this.element,Math.round(this.xPos),Math.round(this.yPos));if(this.yPos>browserHeight){this.yPos=-50}};function setTranslate3DTransform(a,c,b){var d="translate3d("+c+"px, "+b+"px, 0)";a.style[transformProperty]=d}function generateSnowflakes(){var b=document.querySelector(".snowflake");var h=b.parentNode;browserWidth=document.documentElement.clientWidth;browserHeight=document.documentElement.clientHeight;for(var d=0;d<numberOfSnowflakes;d++){var j=b.cloneNode(true);h.appendChild(j);var e=getPosition(50,browserWidth);var a=getPosition(50,browserHeight);var c=5+Math.random()*40;var g=4+Math.random()*10;var f=new Snowflake(j,g,c,e,a);snowflakes.push(f)}h.removeChild(b);moveSnowflakes()}function moveSnowflakes(){for(var b=0;b<snowflakes.length;b++){var a=snowflakes[b];a.update()}if(resetPosition){browserWidth=document.documentElement.clientWidth;browserHeight=document.documentElement.clientHeight;for(var b=0;b<snowflakes.length;b++){var a=snowflakes[b];a.xPos=getPosition(50,browserWidth);a.yPos=getPosition(50,browserHeight)}resetPosition=false}requestAnimationFrame(moveSnowflakes)}function getPosition(b,a){return Math.round(-1*b+Math.random()*(a+2*b))}function setResetFlag(a){resetPosition=true};
 //]]>
-// Chờ script hit counter load xong, ép tất cả link mở tab mới, bộ đếm truy cập
-setTimeout(() => {
-const links = document.getElementById('counter-wrapper').getElementsByTagName('a');
-for(let a of links){
-a.setAttribute('target','_blank');
-a.setAttribute('rel','noopener');
-}
-}, 1000);
 
 // Phần Lá Cờ VN Tung Bay
 document.addEventListener('DOMContentLoaded', () => {
