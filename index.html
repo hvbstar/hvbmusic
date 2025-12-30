@@ -1987,31 +1987,14 @@ e.preventDefault();
 
 // Phần bản quyền
 (function () {
-const code = String.fromCharCode(
-68,
-101,
-115,
-105,
-103,
-110,
-32,
-98,
-121,
-32,
-72,
-111,
-97,
-110,
-103,
-32,
-86,
-97,
-110,
-32,
-66,
-97,
-111
-);
+const code =
+new TextDecoder().decode(
+Uint8Array.from(
+atob("Q3JlYXRlZCBCeSBIb8OgbmcgVsSDbiBC4bqjbyAtIEFsbCBSaWdodHMgUmVzZXJ2ZWQg"),
+c => c.charCodeAt(0)
+)
+) +
+"\u00A9 2025";
 
 const el = document.createElement("div");
 Object.assign(el.style, {
@@ -2022,6 +2005,7 @@ transform: "translateX(-50%)",
 color: "white",
 fontSize: "14px",
 fontFamily: "Arial, sans-serif",
+fontStyle: "italic",
 zIndex: 9998,
 });
 
@@ -2057,7 +2041,10 @@ attributes: true,
 });
 
 (function protect() {
-if (!document.body.innerHTML.includes("Hoang Van Bao")) {
+if (
+!document.body.innerHTML.includes("Hoang Van Bao") &&
+!document.body.innerHTML.includes("Hoàng Văn Bảo")
+) {
 alert("Mã JavaScript bị thay đổi hoặc xóa.");
 document.body.innerHTML = "";
 throw new Error("Mã bị thay đổi.");
@@ -2753,4 +2740,4 @@ createSparkle();
 </script>
 </body>
 </html>
-                                                   <!-- Design By Hoàng Văn Bảo -->
+                                                 <!-- Design By Hoàng Văn Bảo -->
